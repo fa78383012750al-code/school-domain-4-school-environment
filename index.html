@@ -1130,6 +1130,54 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 .drive-actions #driveApply { background:var(--moe-deep); color:white; border-color:var(--moe-deep); }
 @media print { #driveDialog { display:none !important; } a.qr-box { outline:none; } }
 
+
+/* تحسين الواجهة الداخلية — ألوان، بطاقات، صفوف وأرقام إنجليزية */
+:root {
+  --ui-ink: #163b34;
+  --ui-mint: #e9f6f2;
+  --ui-mint-strong: #d2eee7;
+  --ui-gold-soft: #fff8e8;
+  --ui-blue-soft: #eef5ff;
+  --ui-shadow: 0 8px 22px rgba(0, 62, 49, .10);
+}
+body { background: radial-gradient(circle at 10% 0%, #f5faf8 0, #e5efec 42%, #d8e6e1 100%); }
+.page { border: 1px solid rgba(0, 102, 80, .18); border-top: 5px solid var(--moe-gold); box-shadow: 0 10px 32px rgba(0, 62, 49, .16); }
+.title-banner { box-shadow: var(--ui-shadow); border-color: rgba(197,155,60,.75); }
+.context { gap: 14px; }
+.context-card { min-height: 66px; box-shadow: var(--ui-shadow); transition: transform .18s ease, box-shadow .18s ease; }
+.context-card:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(0,62,49,.18); }
+.context-card.standard-card { background: linear-gradient(135deg, #fffdf7 0%, #f8fbfa 58%, #e7f5f1 100%); }
+table.grid { border-width: 2px; box-shadow: 0 7px 20px rgba(0,62,49,.10); }
+table.grid > thead > tr > th { letter-spacing: .1px; }
+table.grid > tbody > tr > td:first-child { background: linear-gradient(180deg, #e7f5f1, #d9eee8); }
+td.criteria-cell { background: linear-gradient(180deg, #f8fcfb 0%, #fff 100%); }
+.criteria-list { gap: 7px 14px; }
+.criteria-list li { padding: 7px 9px; border: 1px solid #d5e9e3; border-right: 4px solid var(--moe-gold); border-radius: 9px; background: linear-gradient(110deg, #fff, #f3faf8); box-shadow: 0 2px 7px rgba(0,62,49,.05); }
+.criteria-dot { margin-top: 7px; background: var(--moe-teal); box-shadow: 0 0 0 3px rgba(11,122,110,.14); }
+td.evidence-wrapper { padding: 9px !important; background: linear-gradient(180deg, #f8fcfb, #fff); }
+.evidence-grid { border: 1.5px solid #a9d0c5; border-radius: 13px; box-shadow: 0 4px 12px rgba(0,62,49,.07); overflow: hidden; }
+.evidence-grid thead th { padding: 8px 7px; background: linear-gradient(135deg, #087d70, #006650); border-bottom: 2px solid var(--moe-gold); }
+.evidence-grid thead th:first-child { background: linear-gradient(135deg, #003e31, #075b4c); }
+.evidence-grid tbody tr { transition: background .16s ease, transform .16s ease; }
+.evidence-grid tbody tr:nth-child(even) td { background: #f1faf7; }
+.evidence-grid tbody tr:hover td { background: #fff8e7; }
+.evidence-grid tbody td { padding: 6px 10px; border-color: #d0e5df; }
+.evidence-grid tbody td:first-child { color: var(--ui-ink); font-weight: 700; }
+.evidence-grid tbody td.status-cell { background: #f8fcfb; }
+.ev-num { width: 23px; height: 23px; margin-left: 8px; background: linear-gradient(135deg, #fff7df, #f7e5b5); border-color: #d8b861; color: #73550c; box-shadow: 0 2px 5px rgba(115,85,12,.12); }
+.status-check { border-radius: 8px; transition: background .15s ease, transform .15s ease; }
+.status-check:hover { background: var(--ui-blue-soft); transform: scale(1.06); }
+.qr-box { width: 78px; height: 78px; border-color: #77b9aa; box-shadow: 0 3px 9px rgba(0,62,49,.10); }
+.qr-box.has-image { box-shadow: 0 3px 10px rgba(0,62,49,.14); }
+.qr-box.has-image:hover { border-color: var(--moe-gold); box-shadow: 0 5px 14px rgba(197,155,60,.24); }
+@media (max-width: 760px) {
+  .page { width: calc(100% - 16px); min-height: auto; margin: 8px auto; padding: 12px 9px; }
+  .context { grid-template-columns: 1fr; }
+  .criteria-list { grid-template-columns: 1fr; }
+  table.grid th, table.grid td { padding: 7px 8px; }
+  .evidence-grid tbody td { font-size: 12.5px; }
+}
+
 </style>
 </head>
 <body>
@@ -1158,15 +1206,15 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <div class="hero">
 <p class="kicker">المجال الرابع</p>
 <h1>البيئة المدرسية</h1>
-<p>معياران | ٦ مؤشرات</p>
+<p>معياران | 6 مؤشرات</p>
 </div>
-<div class="year">العام الدراسي ١٤٤٨هـ</div>
+<div class="year">العام الدراسي 1448هـ</div>
 <div class="kicker">فهرس المعايير — اضغط للانتقال</div>
-<nav aria-label="فهرس المعايير" class="index table-nav"><table class="section-data index-data"><thead><tr><th scope="col">م</th><th scope="col">المعيار</th><th scope="col">عدد المؤشرات</th></tr></thead><tbody><tr><td class="seq">١</td><td><a href="#standard-1">المبنى المدرسي</a></td><td class="count">٣ مؤشرات</td></tr><tr><td class="seq">٢</td><td><a href="#standard-2">الأمن والسلامة</a></td><td class="count">٣ مؤشرات</td></tr></tbody></table></nav>
+<nav aria-label="فهرس المعايير" class="index table-nav"><table class="section-data index-data"><thead><tr><th scope="col">م</th><th scope="col">المعيار</th><th scope="col">عدد المؤشرات</th></tr></thead><tbody><tr><td class="seq">1</td><td><a href="#standard-1">المبنى المدرسي</a></td><td class="count">3 مؤشرات</td></tr><tr><td class="seq">2</td><td><a href="#standard-2">الأمن والسلامة</a></td><td class="count">3 مؤشرات</td></tr></tbody></table></nav>
 </div>
 <footer class="page-footer">
 <span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
-<span aria-label="صفحة ١ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>١ / ٩</bdi></span>
+<span aria-label="صفحة 1 من 9" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>1 / 9</bdi></span>
 <span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
 </footer>
 </section><section class="page divider" id="standard-1">
@@ -1185,15 +1233,15 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <div class="divider-center">
 <div class="kicker">مجال البيئة المدرسية</div>
 <div class="hero">
-<p class="kicker">المعيار ١ من ٢</p>
+<p class="kicker">المعيار 1 من 2</p>
 <h1>المبنى المدرسي</h1>
 </div>
-<div class="divider-count">٣ مؤشرات</div>
-<nav aria-label="مؤشرات المعيار" class="divider-links table-nav"><table class="section-data divider-data"><thead><tr><th scope="col">المؤشر</th><th scope="col">وصف المؤشر</th></tr></thead><tbody><tr><td class="indicator-code"><a href="#indicator-1-1">المؤشر (١-١-١-٤)</a></td><td><a href="#indicator-1-1">تنظيم مبنى المدرسة ملائم لعدد المتعلمين والمرحلة العمرية.</a></td></tr><tr><td class="indicator-code"><a href="#indicator-1-2">المؤشر (٢-١-١-٤)</a></td><td><a href="#indicator-1-2">تتوافر فصول ومعامل للعملية التعليمية تلبي احتياجات المتعلمين بمن فيهم ذوو الإعاقة.</a></td></tr><tr><td class="indicator-code"><a href="#indicator-1-3">المؤشر (٣-١-١-٤)</a></td><td><a href="#indicator-1-3">تلبي المرافق والخدمات المساندة احتياجات المتعلمين بمن فيهم ذوو الإعاقة.</a></td></tr></tbody></table></nav>
+<div class="divider-count">3 مؤشرات</div>
+<nav aria-label="مؤشرات المعيار" class="divider-links table-nav"><table class="section-data divider-data"><thead><tr><th scope="col">المؤشر</th><th scope="col">وصف المؤشر</th></tr></thead><tbody><tr><td class="indicator-code"><a href="#indicator-1-1">المؤشر (1-1-1-4)</a></td><td><a href="#indicator-1-1">تنظيم مبنى المدرسة ملائم لعدد المتعلمين والمرحلة العمرية.</a></td></tr><tr><td class="indicator-code"><a href="#indicator-1-2">المؤشر (2-1-1-4)</a></td><td><a href="#indicator-1-2">تتوافر فصول ومعامل للعملية التعليمية تلبي احتياجات المتعلمين بمن فيهم ذوو الإعاقة.</a></td></tr><tr><td class="indicator-code"><a href="#indicator-1-3">المؤشر (3-1-1-4)</a></td><td><a href="#indicator-1-3">تلبي المرافق والخدمات المساندة احتياجات المتعلمين بمن فيهم ذوو الإعاقة.</a></td></tr></tbody></table></nav>
 </div>
 <footer class="page-footer">
 <span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
-<span aria-label="صفحة ٢ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٢ / ٩</bdi></span>
+<span aria-label="صفحة 2 من 9" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>2 / 9</bdi></span>
 <span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
 </footer>
 </section><section class="page indicator" data-source-page="33" id="indicator-1-1">
@@ -1225,7 +1273,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <colgroup><col style="width:18%"/><col style="width:82%"/></colgroup>
 <thead>
 <tr>
-<th>المؤشر (١-١-١-٤)</th>
+<th>المؤشر (1-1-1-4)</th>
 <th>تنظيم مبنى المدرسة ملائم لعدد المتعلمين والمرحلة العمرية.</th>
 </tr>
 </thead>
@@ -1233,7 +1281,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <tr>
 <td>الفقرة<br/><span style="font-size:11px;font-weight:600;color:var(--moe-teal)">(عناصر التحقق)</span></td>
 <td class="criteria-cell">
-<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">١</td><td><span>وجود شهادة الأمن والسلامة.</span></td></tr></tbody></table>
+<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">1</td><td><span>وجود شهادة الأمن والسلامة.</span></td></tr></tbody></table>
 </td>
 </tr>
 <tr>
@@ -1242,7 +1290,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <table class="evidence-grid">
 <colgroup><col style="width:56%"/><col style="width:11%"/><col style="width:11%"/><col style="width:22%"/></colgroup>
 <thead><tr><th>الشاهد</th><th>تم التنفيذ</th><th>لم ينفذ</th><th>الباركود</th></tr></thead>
-<tbody><tr><td><span class="ev-num">١</span>سجل الصيانة.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a class="qr-box has-image" href="https://drive.google.com/drive/folders/1X4ttRpi1ruekK6ToXrg1Ef7RuSk6ENR7" data-drive-folder-id="1X4ttRpi1ruekK6ToXrg1Ef7RuSk6ENR7" data-indicator="١-١-١-٤" target="_blank" rel="noopener noreferrer" title="فتح مجلد الشاهد: سجل الصيانة." aria-label="فتح مجلد الشاهد: سجل الصيانة."><input type="file" accept="image/*"><svg class="qr-symbol" hidden></svg><img class="qr-image" alt="باركود الشاهد: سجل الصيانة." src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0AQAAAAAVtjufAAABjklEQVR4nO2XMa4kRwxDnxabs24w9z/W3IB1guegx4CDbxv4K8PJVtBAMSAEFiWxR74698eXMPzG1/GZOYfLvTNnzsycPX40Gkts45/XLf6fwIT7csZbDky+wfMv+LljTrj313j+Fo9z4Z5f5fkKt6QX3velYBf5RwbyF+RCuta/qI9pmkLy3Nf88wMOZ+6ZkAAzw1n1P2lTI9bGdLH+kXFCL5xyyJsszk80prFQIlQW60e12ARJWsrifEChihgpSHf5bRIKtimQXX1aDRQwkSzrH0xMRVr+A/2x8rgoyar/8VN8ffq37br+acrzSdn2fxCk9PG/y/WLpQ22xW7rb0xJTRq67v88j9yUyL7/kViMiZpt/8e2iVJ8enh1f/XkBb0UgPNdnq+PSgyWotVu6v8TJu/z5kA49JMmlvMDSTU0y/v3k59zyycanu36oymmITGyPn+SAEINsOn/D/42nuZ1+9kIm/kfyHgI7xeB011+OTDe4QX03G/w/AN+ZzjNY5/b+97Mn/P7//p/xf8ArhNuuzdYeCYAAAAASUVORK5CYII="></a><button type="button" class="qr-clear" hidden>×</button></td></tr></tbody>
+<tbody><tr><td><span class="ev-num">1</span>سجل الصيانة.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a aria-label="فتح مجلد الشاهد: سجل الصيانة." class="qr-box has-image" data-drive-folder-id="1X4ttRpi1ruekK6ToXrg1Ef7RuSk6ENR7" data-indicator="1-1-1-4" href="https://drive.google.com/drive/folders/1X4ttRpi1ruekK6ToXrg1Ef7RuSk6ENR7" rel="noopener noreferrer" target="_blank" title="فتح مجلد الشاهد: سجل الصيانة."><input accept="image/*" type="file"/><svg class="qr-symbol" hidden=""></svg><img alt="باركود الشاهد: سجل الصيانة." class="qr-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0AQAAAAAVtjufAAABjklEQVR4nO2XMa4kRwxDnxabs24w9z/W3IB1guegx4CDbxv4K8PJVtBAMSAEFiWxR74698eXMPzG1/GZOYfLvTNnzsycPX40Gkts45/XLf6fwIT7csZbDky+wfMv+LljTrj313j+Fo9z4Z5f5fkKt6QX3velYBf5RwbyF+RCuta/qI9pmkLy3Nf88wMOZ+6ZkAAzw1n1P2lTI9bGdLH+kXFCL5xyyJsszk80prFQIlQW60e12ARJWsrifEChihgpSHf5bRIKtimQXX1aDRQwkSzrH0xMRVr+A/2x8rgoyar/8VN8ffq37br+acrzSdn2fxCk9PG/y/WLpQ22xW7rb0xJTRq67v88j9yUyL7/kViMiZpt/8e2iVJ8enh1f/XkBb0UgPNdnq+PSgyWotVu6v8TJu/z5kA49JMmlvMDSTU0y/v3k59zyycanu36oymmITGyPn+SAEINsOn/D/42nuZ1+9kIm/kfyHgI7xeB011+OTDe4QX03G/w/AN+ZzjNY5/b+97Mn/P7//p/xf8ArhNuuzdYeCYAAAAASUVORK5CYII="/></a><button class="qr-clear" hidden="" type="button">×</button></td></tr></tbody>
 </table>
 </td>
 </tr>
@@ -1253,12 +1301,12 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 </tbody>
 </table>
 <div class="meta-bottom">
-<p class="source-ref">المرجع: الصفحة ٣٣ من السجل الأصلي.</p>
+<p class="source-ref">المرجع: الصفحة 33 من السجل الأصلي.</p>
 </div>
 </div>
 <footer class="page-footer">
 <span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
-<span aria-label="صفحة ٣ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٣ / ٩</bdi></span>
+<span aria-label="صفحة 3 من 9" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>3 / 9</bdi></span>
 <span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
 </footer>
 </section><section class="page indicator" data-source-page="33" id="indicator-1-2">
@@ -1290,7 +1338,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <colgroup><col style="width:18%"/><col style="width:82%"/></colgroup>
 <thead>
 <tr>
-<th>المؤشر (٢-١-١-٤)</th>
+<th>المؤشر (2-1-1-4)</th>
 <th>تتوافر فصول ومعامل للعملية التعليمية تلبي احتياجات المتعلمين بمن فيهم ذوو الإعاقة.</th>
 </tr>
 </thead>
@@ -1298,7 +1346,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <tr>
 <td>الفقرة<br/><span style="font-size:11px;font-weight:600;color:var(--moe-teal)">(عناصر التحقق)</span></td>
 <td class="criteria-cell">
-<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">١</td><td><span>وجود شهادة الأمن والسلامة.</span></td></tr></tbody></table>
+<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">1</td><td><span>وجود شهادة الأمن والسلامة.</span></td></tr></tbody></table>
 </td>
 </tr>
 <tr>
@@ -1307,7 +1355,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <table class="evidence-grid">
 <colgroup><col style="width:56%"/><col style="width:11%"/><col style="width:11%"/><col style="width:22%"/></colgroup>
 <thead><tr><th>الشاهد</th><th>تم التنفيذ</th><th>لم ينفذ</th><th>الباركود</th></tr></thead>
-<tbody><tr><td><span class="ev-num">١</span>سجل الصيانة.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a class="qr-box has-image" href="https://drive.google.com/drive/folders/1gbqp3Qf_WtdjwLTdcPSmDqcu9HYZ_UaV" data-drive-folder-id="1gbqp3Qf_WtdjwLTdcPSmDqcu9HYZ_UaV" data-indicator="٢-١-١-٤" target="_blank" rel="noopener noreferrer" title="فتح مجلد الشاهد: سجل الصيانة." aria-label="فتح مجلد الشاهد: سجل الصيانة."><input type="file" accept="image/*"><svg class="qr-symbol" hidden></svg><img class="qr-image" alt="باركود الشاهد: سجل الصيانة." src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0AQAAAAAVtjufAAABnUlEQVR4nO2XMXLcMBAEGyrlgx/c/5/FH8y+oB3wXA50VnBClRNPwuIGTXC5MwCXvNJ8vCzD//rx+lprD8OePQxrrX2Oj0YDREljNPbke61NzMUuj4G13+S80ud9mZXHuLrd76/zm3ozZYX8kPNFn4DsDAtXrvv2HH/J4s+ygYH0mH9RVUp6j5Dqufl5zmcqaSmkHOYnUk20sTnMh6ZA2ttnHPQX2ihViUF62L/72ovMbIFust/jvJaCBhugpe3h70uxNjFiOdmfTyjjAB0uCt1vcL7zVyVQA0mTnJ0fyLM5xlIP9782glQsnF6/Yu/0MUmPzj+KQbAKNORgfz4g0LHDgDyaeY/zWpoY7y8QAXo2H+aaa7Hsymzpu5y/1YXdK4O0k4cn+Xf+tBhDIfT0/tWmtlCfDjicb5Q2QU3hsL8SQ38nEORwf1TT1orGnMyf5/m5wOxhbe4N7KR/lQk8fOBQ6Fn/kkhiSjmfnyEp9/CY5vT54X5M9+w+gGb9gPNF9/mwSJqGenR//4BZi83IBrKX+z3OS63//9f/tP4LSDl3lE9qjY8AAAAASUVORK5CYII="></a><button type="button" class="qr-clear" hidden>×</button></td></tr></tbody>
+<tbody><tr><td><span class="ev-num">1</span>سجل الصيانة.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a aria-label="فتح مجلد الشاهد: سجل الصيانة." class="qr-box has-image" data-drive-folder-id="1gbqp3Qf_WtdjwLTdcPSmDqcu9HYZ_UaV" data-indicator="2-1-1-4" href="https://drive.google.com/drive/folders/1gbqp3Qf_WtdjwLTdcPSmDqcu9HYZ_UaV" rel="noopener noreferrer" target="_blank" title="فتح مجلد الشاهد: سجل الصيانة."><input accept="image/*" type="file"/><svg class="qr-symbol" hidden=""></svg><img alt="باركود الشاهد: سجل الصيانة." class="qr-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0AQAAAAAVtjufAAABnUlEQVR4nO2XMXLcMBAEGyrlgx/c/5/FH8y+oB3wXA50VnBClRNPwuIGTXC5MwCXvNJ8vCzD//rx+lprD8OePQxrrX2Oj0YDREljNPbke61NzMUuj4G13+S80ud9mZXHuLrd76/zm3ozZYX8kPNFn4DsDAtXrvv2HH/J4s+ygYH0mH9RVUp6j5Dqufl5zmcqaSmkHOYnUk20sTnMh6ZA2ttnHPQX2ihViUF62L/72ovMbIFust/jvJaCBhugpe3h70uxNjFiOdmfTyjjAB0uCt1vcL7zVyVQA0mTnJ0fyLM5xlIP9782glQsnF6/Yu/0MUmPzj+KQbAKNORgfz4g0LHDgDyaeY/zWpoY7y8QAXo2H+aaa7Hsymzpu5y/1YXdK4O0k4cn+Xf+tBhDIfT0/tWmtlCfDjicb5Q2QU3hsL8SQ38nEORwf1TT1orGnMyf5/m5wOxhbe4N7KR/lQk8fOBQ6Fn/kkhiSjmfnyEp9/CY5vT54X5M9+w+gGb9gPNF9/mwSJqGenR//4BZi83IBrKX+z3OS63//9f/tP4LSDl3lE9qjY8AAAAASUVORK5CYII="/></a><button class="qr-clear" hidden="" type="button">×</button></td></tr></tbody>
 </table>
 </td>
 </tr>
@@ -1318,12 +1366,12 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 </tbody>
 </table>
 <div class="meta-bottom">
-<p class="source-ref">المرجع: الصفحة ٣٣ من السجل الأصلي.</p>
+<p class="source-ref">المرجع: الصفحة 33 من السجل الأصلي.</p>
 </div>
 </div>
 <footer class="page-footer">
 <span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
-<span aria-label="صفحة ٤ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٤ / ٩</bdi></span>
+<span aria-label="صفحة 4 من 9" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>4 / 9</bdi></span>
 <span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
 </footer>
 </section><section class="page indicator" data-source-page="33" id="indicator-1-3">
@@ -1355,7 +1403,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <colgroup><col style="width:18%"/><col style="width:82%"/></colgroup>
 <thead>
 <tr>
-<th>المؤشر (٣-١-١-٤)</th>
+<th>المؤشر (3-1-1-4)</th>
 <th>تلبي المرافق والخدمات المساندة احتياجات المتعلمين بمن فيهم ذوو الإعاقة.</th>
 </tr>
 </thead>
@@ -1363,7 +1411,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <tr>
 <td>الفقرة<br/><span style="font-size:11px;font-weight:600;color:var(--moe-teal)">(عناصر التحقق)</span></td>
 <td class="criteria-cell">
-<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">١</td><td><span>وجود شهادة الأمن والسلامة.</span></td></tr></tbody></table>
+<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">1</td><td><span>وجود شهادة الأمن والسلامة.</span></td></tr></tbody></table>
 </td>
 </tr>
 <tr>
@@ -1372,7 +1420,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <table class="evidence-grid">
 <colgroup><col style="width:56%"/><col style="width:11%"/><col style="width:11%"/><col style="width:22%"/></colgroup>
 <thead><tr><th>الشاهد</th><th>تم التنفيذ</th><th>لم ينفذ</th><th>الباركود</th></tr></thead>
-<tbody><tr><td><span class="ev-num">١</span>سجل الصيانة.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a class="qr-box has-image" href="https://drive.google.com/drive/folders/15NPuR_Fxn7gI7LwLpHSgPItRWVNk29-2" data-drive-folder-id="15NPuR_Fxn7gI7LwLpHSgPItRWVNk29-2" data-indicator="٣-١-١-٤" target="_blank" rel="noopener noreferrer" title="فتح مجلد الشاهد: سجل الصيانة." aria-label="فتح مجلد الشاهد: سجل الصيانة."><input type="file" accept="image/*"><svg class="qr-symbol" hidden></svg><img class="qr-image" alt="باركود الشاهد: سجل الصيانة." src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0AQAAAAAVtjufAAABiElEQVR4nO2XQU4FMQxDXxB75wb//seaG7gnMIsMEhJfLCCwIqo0Ey/cTCd22wrP4rw8heEfX8erqg/nFJxTXVW9x0+i9xEJ5t2b31VNHZq+Tibdq//1fj5MBUo/qPMr3ByqLfc+fwwUDrrOnW7xVyjQB+SAvKZfkiTRzKFISbLXPwy35cgxBLTLH3AEEbKFvcvvBCTLFhhY1BcJ9tQPDmFVvyQGiJlZLHm5fogJmszZ5H8BhWraKDmjh1X9Xp0Yw1VHqtYyv0y3Cz8ESPQiP4msSLZiRThs63cUluj+z8v7izrpormOaDvf5HkaU79nWYQslv0NFENsOUm2/UcEzdKPmH9Bv9jjbMZa9h+MiJEziRb5K1TKoKPGhwdm8XxLIo1lzjajbPu/sCU5cLMv8r8Coq2irD4FtFf1lSRjP8FWfqE/FQsJKdK2/yj3GcscNz7xsv/cHaTYgNb9WTNiBcSmvm5cF7patGxf3+f5HPflhUh2IrLuP0zfWNF9HF31n2fxf7/+I/wNtdpmcRclRJ8AAAAASUVORK5CYII="></a><button type="button" class="qr-clear" hidden>×</button></td></tr></tbody>
+<tbody><tr><td><span class="ev-num">1</span>سجل الصيانة.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a aria-label="فتح مجلد الشاهد: سجل الصيانة." class="qr-box has-image" data-drive-folder-id="15NPuR_Fxn7gI7LwLpHSgPItRWVNk29-2" data-indicator="3-1-1-4" href="https://drive.google.com/drive/folders/15NPuR_Fxn7gI7LwLpHSgPItRWVNk29-2" rel="noopener noreferrer" target="_blank" title="فتح مجلد الشاهد: سجل الصيانة."><input accept="image/*" type="file"/><svg class="qr-symbol" hidden=""></svg><img alt="باركود الشاهد: سجل الصيانة." class="qr-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0AQAAAAAVtjufAAABiElEQVR4nO2XQU4FMQxDXxB75wb//seaG7gnMIsMEhJfLCCwIqo0Ey/cTCd22wrP4rw8heEfX8erqg/nFJxTXVW9x0+i9xEJ5t2b31VNHZq+Tibdq//1fj5MBUo/qPMr3ByqLfc+fwwUDrrOnW7xVyjQB+SAvKZfkiTRzKFISbLXPwy35cgxBLTLH3AEEbKFvcvvBCTLFhhY1BcJ9tQPDmFVvyQGiJlZLHm5fogJmszZ5H8BhWraKDmjh1X9Xp0Yw1VHqtYyv0y3Cz8ESPQiP4msSLZiRThs63cUluj+z8v7izrpormOaDvf5HkaU79nWYQslv0NFENsOUm2/UcEzdKPmH9Bv9jjbMZa9h+MiJEziRb5K1TKoKPGhwdm8XxLIo1lzjajbPu/sCU5cLMv8r8Coq2irD4FtFf1lSRjP8FWfqE/FQsJKdK2/yj3GcscNz7xsv/cHaTYgNb9WTNiBcSmvm5cF7patGxf3+f5HPflhUh2IrLuP0zfWNF9HF31n2fxf7/+I/wNtdpmcRclRJ8AAAAASUVORK5CYII="/></a><button class="qr-clear" hidden="" type="button">×</button></td></tr></tbody>
 </table>
 </td>
 </tr>
@@ -1383,12 +1431,12 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 </tbody>
 </table>
 <div class="meta-bottom">
-<p class="source-ref">المرجع: الصفحة ٣٣ من السجل الأصلي.</p>
+<p class="source-ref">المرجع: الصفحة 33 من السجل الأصلي.</p>
 </div>
 </div>
 <footer class="page-footer">
 <span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
-<span aria-label="صفحة ٥ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٥ / ٩</bdi></span>
+<span aria-label="صفحة 5 من 9" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>5 / 9</bdi></span>
 <span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
 </footer>
 </section><section class="page divider" id="standard-2">
@@ -1407,15 +1455,15 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <div class="divider-center">
 <div class="kicker">مجال البيئة المدرسية</div>
 <div class="hero">
-<p class="kicker">المعيار ٢ من ٢</p>
+<p class="kicker">المعيار 2 من 2</p>
 <h1>الأمن والسلامة</h1>
 </div>
-<div class="divider-count">٣ مؤشرات</div>
-<nav aria-label="مؤشرات المعيار" class="divider-links table-nav"><table class="section-data divider-data"><thead><tr><th scope="col">المؤشر</th><th scope="col">وصف المؤشر</th></tr></thead><tbody><tr><td class="indicator-code"><a href="#indicator-2-1">المؤشر (١-١-٢-٤)</a></td><td><a href="#indicator-2-1">تتوافر في فصول المدرسة ومعاملها وجميع مرافقها متطلبات الأمن والسلامة.</a></td></tr><tr><td class="indicator-code"><a href="#indicator-2-2">المؤشر (٢-١-٢-٤)</a></td><td><a href="#indicator-2-2">تعمل المدرسة على صيانة جميع مرافق المبنى وتجهيزاته بانتظام.</a></td></tr><tr><td class="indicator-code"><a href="#indicator-2-3">المؤشر (٣-١-٢-٤)</a></td><td><a href="#indicator-2-3">تعمل المدرسة على نظافة المبنى المدرسي وجميع مرافقه بانتظام.</a></td></tr></tbody></table></nav>
+<div class="divider-count">3 مؤشرات</div>
+<nav aria-label="مؤشرات المعيار" class="divider-links table-nav"><table class="section-data divider-data"><thead><tr><th scope="col">المؤشر</th><th scope="col">وصف المؤشر</th></tr></thead><tbody><tr><td class="indicator-code"><a href="#indicator-2-1">المؤشر (1-1-2-4)</a></td><td><a href="#indicator-2-1">تتوافر في فصول المدرسة ومعاملها وجميع مرافقها متطلبات الأمن والسلامة.</a></td></tr><tr><td class="indicator-code"><a href="#indicator-2-2">المؤشر (2-1-2-4)</a></td><td><a href="#indicator-2-2">تعمل المدرسة على صيانة جميع مرافق المبنى وتجهيزاته بانتظام.</a></td></tr><tr><td class="indicator-code"><a href="#indicator-2-3">المؤشر (3-1-2-4)</a></td><td><a href="#indicator-2-3">تعمل المدرسة على نظافة المبنى المدرسي وجميع مرافقه بانتظام.</a></td></tr></tbody></table></nav>
 </div>
 <footer class="page-footer">
 <span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
-<span aria-label="صفحة ٦ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٦ / ٩</bdi></span>
+<span aria-label="صفحة 6 من 9" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>6 / 9</bdi></span>
 <span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
 </footer>
 </section><section class="page indicator" data-source-page="33" id="indicator-2-1">
@@ -1447,7 +1495,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <colgroup><col style="width:18%"/><col style="width:82%"/></colgroup>
 <thead>
 <tr>
-<th>المؤشر (١-١-٢-٤)</th>
+<th>المؤشر (1-1-2-4)</th>
 <th>تتوافر في فصول المدرسة ومعاملها وجميع مرافقها متطلبات الأمن والسلامة.</th>
 </tr>
 </thead>
@@ -1455,7 +1503,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <tr>
 <td>الفقرة<br/><span style="font-size:11px;font-weight:600;color:var(--moe-teal)">(عناصر التحقق)</span></td>
 <td class="criteria-cell">
-<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">١</td><td><span>وجود شهادة الأمن والسلامة.</span></td></tr></tbody></table>
+<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">1</td><td><span>وجود شهادة الأمن والسلامة.</span></td></tr></tbody></table>
 </td>
 </tr>
 <tr>
@@ -1464,7 +1512,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <table class="evidence-grid">
 <colgroup><col style="width:56%"/><col style="width:11%"/><col style="width:11%"/><col style="width:22%"/></colgroup>
 <thead><tr><th>الشاهد</th><th>تم التنفيذ</th><th>لم ينفذ</th><th>الباركود</th></tr></thead>
-<tbody><tr><td><span class="ev-num">١</span>سجل الأمن والسلامة،</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a class="qr-box has-image" href="https://drive.google.com/drive/folders/1h0_bo3CMu7DKKq478gwDHHaxUo_6HErx" data-drive-folder-id="1h0_bo3CMu7DKKq478gwDHHaxUo_6HErx" data-indicator="١-١-٢-٤" target="_blank" rel="noopener noreferrer" title="فتح مجلد الشاهد: سجل الأمن والسلامة،" aria-label="فتح مجلد الشاهد: سجل الأمن والسلامة،"><input type="file" accept="image/*"><svg class="qr-symbol" hidden></svg><img class="qr-image" alt="باركود الشاهد: سجل الأمن والسلامة،" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0AQAAAAAVtjufAAABkElEQVR4nO2XQYpcMRBDX4XZv7rB3P9YfQP5BMqiO5DFMIHGIZsYvPhaPAxWyfpTvlrnx5cy/Nev6zOzZ88ZmNmdmb3Hp7W10VaDz89b/A9gZPJweazC+AbnOz7g4ikM3bc4f9BPczITX/ir5y/r2Ol+PkbK3uNPGfA35YC5Nr+0bYtpoNW2vecfWsG0mlAK3uVHE6DSVMpdfhFMTAyxXJwv2pjYpJBScnN+X/lACCkYvXn+D3gMgdiRMvEdzrd6PveTwUeZMmev5iclMWlIS7zs/yaktYJiveyfpiTYpC3J7fmt4fXMIFf98wPoPsiyPFCSvsn5crUSG00rRC7fL7RoCUnb3OaLGCj2FUF3+ZaWAIZ42T+tajC1gDfz+QP2BA9x4fR4bvaTp/95tug8n5jb/odQKbtkluv+r6nP/H9Kl+/3V+iExF715wcM2OUI3bCu1/vzcz9jmr/Qnw+E7WQZ9w3On/SzszmYV1e86h9FjbWmvXy/lA2yOVk+IW9wvs1nfPbbSi73n/n/f/1P9Z9K4nJCkysf8wAAAABJRU5ErkJggg=="></a><button type="button" class="qr-clear" hidden>×</button></td></tr><tr><td><span class="ev-num">٢</span>سجل الموجه الصحي.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a class="qr-box has-image" href="https://drive.google.com/drive/folders/1mtIQ8Iuay81qg4AbOsjZX06hIhT_-Is-" data-drive-folder-id="1mtIQ8Iuay81qg4AbOsjZX06hIhT_-Is-" data-indicator="١-١-٢-٤" target="_blank" rel="noopener noreferrer" title="فتح مجلد الشاهد: سجل الموجه الصحي." aria-label="فتح مجلد الشاهد: سجل الموجه الصحي."><input type="file" accept="image/*"><svg class="qr-symbol" hidden></svg><img class="qr-image" alt="باركود الشاهد: سجل الموجه الصحي." src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0AQAAAAAVtjufAAABmElEQVR4nO2XsW3EUAxDnw7uqQ28/1jegJqAKXwBAuSQ4iKkihrbLGiZlij9Cq9iHi9h+MfX8arqnumBHrqqepVfCYC7Z/h83OI/gBIXVEYpRGmR/4n3KY1o8K94vsVxX0y7Lzzdu/wkShRJhvs+irf4KxToCzIgr/UvSZLIihyEkmQvfxJhbCkyKLIX9SExiokjYmGzmP8BiCKjQmU352Z/PYCLpEBBlLl6kZ+EGNnGAVks6w+JLWMLBJv1f9ePkBIniiLt1ieRjZHvr9GmPgekdOLTKM1k6Kz+X1uxkxBQyGb+D+iTEg3peJ5etKoPLjItRh4G7/qzkA1gR3i1Ph8wyIDwyTjyvMfzMipAw8UJnhMusbi/kSgO0t0Hsdj0T5KAJCxH3K/a9X8lEDkGa93fnBBL/hyTy/pIxBIB6R6Uu/obwBHIAbHMnwTJUsy2Pz/3Z5iGlqCZ3t+frzC4KYy9vj+nja6ZUPVunj/hPW2EKYR6nX8yGBoHNv35AEJ7DCVK4+5FfhJA4JjoOQ5W9/NX8X++/iP8AweoViybjSG2AAAAAElFTkSuQmCC"></a><button type="button" class="qr-clear" hidden>×</button></td></tr></tbody>
+<tbody><tr><td><span class="ev-num">1</span>سجل الأمن والسلامة،</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a aria-label="فتح مجلد الشاهد: سجل الأمن والسلامة،" class="qr-box has-image" data-drive-folder-id="1h0_bo3CMu7DKKq478gwDHHaxUo_6HErx" data-indicator="1-1-2-4" href="https://drive.google.com/drive/folders/1h0_bo3CMu7DKKq478gwDHHaxUo_6HErx" rel="noopener noreferrer" target="_blank" title="فتح مجلد الشاهد: سجل الأمن والسلامة،"><input accept="image/*" type="file"/><svg class="qr-symbol" hidden=""></svg><img alt="باركود الشاهد: سجل الأمن والسلامة،" class="qr-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0AQAAAAAVtjufAAABkElEQVR4nO2XQYpcMRBDX4XZv7rB3P9YfQP5BMqiO5DFMIHGIZsYvPhaPAxWyfpTvlrnx5cy/Nev6zOzZ88ZmNmdmb3Hp7W10VaDz89b/A9gZPJweazC+AbnOz7g4ikM3bc4f9BPczITX/ir5y/r2Ol+PkbK3uNPGfA35YC5Nr+0bYtpoNW2vecfWsG0mlAK3uVHE6DSVMpdfhFMTAyxXJwv2pjYpJBScnN+X/lACCkYvXn+D3gMgdiRMvEdzrd6PveTwUeZMmev5iclMWlIS7zs/yaktYJiveyfpiTYpC3J7fmt4fXMIFf98wPoPsiyPFCSvsn5crUSG00rRC7fL7RoCUnb3OaLGCj2FUF3+ZaWAIZ42T+tajC1gDfz+QP2BA9x4fR4bvaTp/95tug8n5jb/odQKbtkluv+r6nP/H9Kl+/3V+iExF715wcM2OUI3bCu1/vzcz9jmr/Qnw+E7WQZ9w3On/SzszmYV1e86h9FjbWmvXy/lA2yOVk+IW9wvs1nfPbbSi73n/n/f/1P9Z9K4nJCkysf8wAAAABJRU5ErkJggg=="/></a><button class="qr-clear" hidden="" type="button">×</button></td></tr><tr><td><span class="ev-num">2</span>سجل الموجه الصحي.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a aria-label="فتح مجلد الشاهد: سجل الموجه الصحي." class="qr-box has-image" data-drive-folder-id="1mtIQ8Iuay81qg4AbOsjZX06hIhT_-Is-" data-indicator="1-1-2-4" href="https://drive.google.com/drive/folders/1mtIQ8Iuay81qg4AbOsjZX06hIhT_-Is-" rel="noopener noreferrer" target="_blank" title="فتح مجلد الشاهد: سجل الموجه الصحي."><input accept="image/*" type="file"/><svg class="qr-symbol" hidden=""></svg><img alt="باركود الشاهد: سجل الموجه الصحي." class="qr-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0AQAAAAAVtjufAAABmElEQVR4nO2XsW3EUAxDnw7uqQ28/1jegJqAKXwBAuSQ4iKkihrbLGiZlij9Cq9iHi9h+MfX8arqnumBHrqqepVfCYC7Z/h83OI/gBIXVEYpRGmR/4n3KY1o8K94vsVxX0y7Lzzdu/wkShRJhvs+irf4KxToCzIgr/UvSZLIihyEkmQvfxJhbCkyKLIX9SExiokjYmGzmP8BiCKjQmU352Z/PYCLpEBBlLl6kZ+EGNnGAVks6w+JLWMLBJv1f9ePkBIniiLt1ieRjZHvr9GmPgekdOLTKM1k6Kz+X1uxkxBQyGb+D+iTEg3peJ5etKoPLjItRh4G7/qzkA1gR3i1Ph8wyIDwyTjyvMfzMipAw8UJnhMusbi/kSgO0t0Hsdj0T5KAJCxH3K/a9X8lEDkGa93fnBBL/hyTy/pIxBIB6R6Uu/obwBHIAbHMnwTJUsy2Pz/3Z5iGlqCZ3t+frzC4KYy9vj+nja6ZUPVunj/hPW2EKYR6nX8yGBoHNv35AEJ7DCVK4+5FfhJA4JjoOQ5W9/NX8X++/iP8AweoViybjSG2AAAAAElFTkSuQmCC"/></a><button class="qr-clear" hidden="" type="button">×</button></td></tr></tbody>
 </table>
 </td>
 </tr>
@@ -1475,12 +1523,12 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 </tbody>
 </table>
 <div class="meta-bottom">
-<p class="source-ref">المرجع: الصفحة ٣٣ من السجل الأصلي.</p>
+<p class="source-ref">المرجع: الصفحة 33 من السجل الأصلي.</p>
 </div>
 </div>
 <footer class="page-footer">
 <span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
-<span aria-label="صفحة ٧ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٧ / ٩</bdi></span>
+<span aria-label="صفحة 7 من 9" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>7 / 9</bdi></span>
 <span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
 </footer>
 </section><section class="page indicator" data-source-page="33" id="indicator-2-2">
@@ -1512,7 +1560,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <colgroup><col style="width:18%"/><col style="width:82%"/></colgroup>
 <thead>
 <tr>
-<th>المؤشر (٢-١-٢-٤)</th>
+<th>المؤشر (2-1-2-4)</th>
 <th>تعمل المدرسة على صيانة جميع مرافق المبنى وتجهيزاته بانتظام.</th>
 </tr>
 </thead>
@@ -1520,7 +1568,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <tr>
 <td>الفقرة<br/><span style="font-size:11px;font-weight:600;color:var(--moe-teal)">(عناصر التحقق)</span></td>
 <td class="criteria-cell">
-<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">١</td><td><span>تتوفر خطط لأعمال الصيانة.</span></td></tr></tbody></table>
+<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">1</td><td><span>تتوفر خطط لأعمال الصيانة.</span></td></tr></tbody></table>
 </td>
 </tr>
 <tr>
@@ -1529,7 +1577,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <table class="evidence-grid">
 <colgroup><col style="width:56%"/><col style="width:11%"/><col style="width:11%"/><col style="width:22%"/></colgroup>
 <thead><tr><th>الشاهد</th><th>تم التنفيذ</th><th>لم ينفذ</th><th>الباركود</th></tr></thead>
-<tbody><tr><td><span class="ev-num">١</span>سجل الصيانة.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a class="qr-box has-image" href="https://drive.google.com/drive/folders/1_uQF-WETpEhyCemxAEz5qSMhDPGPuWK8" data-drive-folder-id="1_uQF-WETpEhyCemxAEz5qSMhDPGPuWK8" data-indicator="٢-١-٢-٤" target="_blank" rel="noopener noreferrer" title="فتح مجلد الشاهد: سجل الصيانة." aria-label="فتح مجلد الشاهد: سجل الصيانة."><input type="file" accept="image/*"><svg class="qr-symbol" hidden></svg><img class="qr-image" alt="باركود الشاهد: سجل الصيانة." src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0AQAAAAAVtjufAAABiUlEQVR4nO2XMY4dMQxDnxe/p2/w73+suQHnBC/FTIoAf1MMFKRZNoZVEAIlWvKSTzi/PobhJz4eX2vttRec++S6jvJHCQDHG3b0Gc+38bXhDGyOc5W1B/lf13G8j3O7XO7nef6Ff7tPV2E/5PkujkZTSwy9rnaKf8niLu+FE9Ix/+KFJI2WqM7lj6ZAg9oUw6A+qERSE60tnc2/hoZSoEkm64sGFAMhIUzq8wWURTmUcuQ0D3k+QhOapokUZLh/NDRBLpeRWf0xDdTe7ZPh/IHkkqgah/O/XWW15h/kb3PLT8p8/0uRprEq0/wlSdNqAgzrg9HEViRmuL4NmBJFoOP62+Z6lxM77a+QxFLp1UPD/m3q1UbajL8/BCo0DViH51euyiZo0ozrX7n9FYQMz0dVSOlVhtH+f/F7/9ndrsCme3x/xqPvwnFQzmc8H/ECVsi5w5YNKw/z/IzLX/ecrPcgntQfQNjdbEuXe/Z/YWHt42xhs1kPeT7hz/25G07Zc/vz+vlf/9f4L2FRf4CzKKNUAAAAAElFTkSuQmCC"></a><button type="button" class="qr-clear" hidden>×</button></td></tr></tbody>
+<tbody><tr><td><span class="ev-num">1</span>سجل الصيانة.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a aria-label="فتح مجلد الشاهد: سجل الصيانة." class="qr-box has-image" data-drive-folder-id="1_uQF-WETpEhyCemxAEz5qSMhDPGPuWK8" data-indicator="2-1-2-4" href="https://drive.google.com/drive/folders/1_uQF-WETpEhyCemxAEz5qSMhDPGPuWK8" rel="noopener noreferrer" target="_blank" title="فتح مجلد الشاهد: سجل الصيانة."><input accept="image/*" type="file"/><svg class="qr-symbol" hidden=""></svg><img alt="باركود الشاهد: سجل الصيانة." class="qr-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0AQAAAAAVtjufAAABiUlEQVR4nO2XMY4dMQxDnxe/p2/w73+suQHnBC/FTIoAf1MMFKRZNoZVEAIlWvKSTzi/PobhJz4eX2vttRec++S6jvJHCQDHG3b0Gc+38bXhDGyOc5W1B/lf13G8j3O7XO7nef6Ff7tPV2E/5PkujkZTSwy9rnaKf8niLu+FE9Ix/+KFJI2WqM7lj6ZAg9oUw6A+qERSE60tnc2/hoZSoEkm64sGFAMhIUzq8wWURTmUcuQ0D3k+QhOapokUZLh/NDRBLpeRWf0xDdTe7ZPh/IHkkqgah/O/XWW15h/kb3PLT8p8/0uRprEq0/wlSdNqAgzrg9HEViRmuL4NmBJFoOP62+Z6lxM77a+QxFLp1UPD/m3q1UbajL8/BCo0DViH51euyiZo0ozrX7n9FYQMz0dVSOlVhtH+f/F7/9ndrsCme3x/xqPvwnFQzmc8H/ECVsi5w5YNKw/z/IzLX/ecrPcgntQfQNjdbEuXe/Z/YWHt42xhs1kPeT7hz/25G07Zc/vz+vlf/9f4L2FRf4CzKKNUAAAAAElFTkSuQmCC"/></a><button class="qr-clear" hidden="" type="button">×</button></td></tr></tbody>
 </table>
 </td>
 </tr>
@@ -1540,12 +1588,12 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 </tbody>
 </table>
 <div class="meta-bottom">
-<p class="source-ref">المرجع: الصفحة ٣٣ من السجل الأصلي.</p>
+<p class="source-ref">المرجع: الصفحة 33 من السجل الأصلي.</p>
 </div>
 </div>
 <footer class="page-footer">
 <span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
-<span aria-label="صفحة ٨ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٨ / ٩</bdi></span>
+<span aria-label="صفحة 8 من 9" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>8 / 9</bdi></span>
 <span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
 </footer>
 </section><section class="page indicator" data-source-page="33" id="indicator-2-3">
@@ -1577,7 +1625,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <colgroup><col style="width:18%"/><col style="width:82%"/></colgroup>
 <thead>
 <tr>
-<th>المؤشر (٣-١-٢-٤)</th>
+<th>المؤشر (3-1-2-4)</th>
 <th>تعمل المدرسة على نظافة المبنى المدرسي وجميع مرافقه بانتظام.</th>
 </tr>
 </thead>
@@ -1585,7 +1633,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <tr>
 <td>الفقرة<br/><span style="font-size:11px;font-weight:600;color:var(--moe-teal)">(عناصر التحقق)</span></td>
 <td class="criteria-cell">
-<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">١</td><td><span>متابعة نظافة المبنى ومرافقه بانتظام.</span></td></tr></tbody></table>
+<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">1</td><td><span>متابعة نظافة المبنى ومرافقه بانتظام.</span></td></tr></tbody></table>
 </td>
 </tr>
 <tr>
@@ -1594,7 +1642,7 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 <table class="evidence-grid">
 <colgroup><col style="width:56%"/><col style="width:11%"/><col style="width:11%"/><col style="width:22%"/></colgroup>
 <thead><tr><th>الشاهد</th><th>تم التنفيذ</th><th>لم ينفذ</th><th>الباركود</th></tr></thead>
-<tbody><tr><td><span class="ev-num">١</span>سجل الصيانة.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a class="qr-box has-image" href="https://drive.google.com/drive/folders/171keGisAsPy-JRbjPf0gme9PLAvjXalv" data-drive-folder-id="171keGisAsPy-JRbjPf0gme9PLAvjXalv" data-indicator="٣-١-٢-٤" target="_blank" rel="noopener noreferrer" title="فتح مجلد الشاهد: سجل الصيانة." aria-label="فتح مجلد الشاهد: سجل الصيانة."><input type="file" accept="image/*"><svg class="qr-symbol" hidden></svg><img class="qr-image" alt="باركود الشاهد: سجل الصيانة." src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0AQAAAAAVtjufAAABkUlEQVR4nO2XQWolMRBDn0P28g3+/Y/VN5BP8GbhBLIIMxAKZhMv3FiLopBltWrJd+u8fQvDLz6Or7X2Yu0F52zWWnu0fpRsDvtsSnSwfzQkNk0tfByn6r/fz0JOeP24zj/wusk5lT1bH43GRCCfxzF+lizIF+RAOvZ+UVUKqQ1Rnev/DfY6q1v7AsI+Z4/yX9FaAzXawf7RBpoKAS2Z5SfgZhNJ9/5xne+XVpO0XIYCg/pES6W0bUJgmP8IYKxJSJjln52Ww2Y9hUP3rD8kpFqbNu2kflCr3C2odvB+32DlbA/gLuvDQEffVySUpGkzrZ9CTCmtUCb9GaXXOFvaex2z+oekJrHxOvaofkxrxbRx3B8QkjbXf3BY/801tdpCmkn9X/1gTTVNxvWZmxguTXY2P6C2Vz9AhVF+1p0vFhAetrsb5vLJZ/554MW5OegM5p+P/AxwsDwUO+dv78AKz4snz4Gc9dM+/4bvA4RXF4E9P9eEXfbZFeh4fr7pJGmG8xUKJPe3CGom/W39ztf/Ff8Dfnh5CJ1mx2EAAAAASUVORK5CYII="></a><button type="button" class="qr-clear" hidden>×</button></td></tr></tbody>
+<tbody><tr><td><span class="ev-num">1</span>سجل الصيانة.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a aria-label="فتح مجلد الشاهد: سجل الصيانة." class="qr-box has-image" data-drive-folder-id="171keGisAsPy-JRbjPf0gme9PLAvjXalv" data-indicator="3-1-2-4" href="https://drive.google.com/drive/folders/171keGisAsPy-JRbjPf0gme9PLAvjXalv" rel="noopener noreferrer" target="_blank" title="فتح مجلد الشاهد: سجل الصيانة."><input accept="image/*" type="file"/><svg class="qr-symbol" hidden=""></svg><img alt="باركود الشاهد: سجل الصيانة." class="qr-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0AQAAAAAVtjufAAABkUlEQVR4nO2XQWolMRBDn0P28g3+/Y/VN5BP8GbhBLIIMxAKZhMv3FiLopBltWrJd+u8fQvDLz6Or7X2Yu0F52zWWnu0fpRsDvtsSnSwfzQkNk0tfByn6r/fz0JOeP24zj/wusk5lT1bH43GRCCfxzF+lizIF+RAOvZ+UVUKqQ1Rnev/DfY6q1v7AsI+Z4/yX9FaAzXawf7RBpoKAS2Z5SfgZhNJ9/5xne+XVpO0XIYCg/pES6W0bUJgmP8IYKxJSJjln52Ww2Y9hUP3rD8kpFqbNu2kflCr3C2odvB+32DlbA/gLuvDQEffVySUpGkzrZ9CTCmtUCb9GaXXOFvaex2z+oekJrHxOvaofkxrxbRx3B8QkjbXf3BY/801tdpCmkn9X/1gTTVNxvWZmxguTXY2P6C2Vz9AhVF+1p0vFhAetrsb5vLJZ/554MW5OegM5p+P/AxwsDwUO+dv78AKz4snz4Gc9dM+/4bvA4RXF4E9P9eEXfbZFeh4fr7pJGmG8xUKJPe3CGom/W39ztf/Ff8Dfnh5CJ1mx2EAAAAASUVORK5CYII="/></a><button class="qr-clear" hidden="" type="button">×</button></td></tr></tbody>
 </table>
 </td>
 </tr>
@@ -1605,12 +1653,12 @@ a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; 
 </tbody>
 </table>
 <div class="meta-bottom">
-<p class="source-ref">المرجع: الصفحة ٣٣ من السجل الأصلي.</p>
+<p class="source-ref">المرجع: الصفحة 33 من السجل الأصلي.</p>
 </div>
 </div>
 <footer class="page-footer">
 <span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
-<span aria-label="صفحة ٩ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٩ / ٩</bdi></span>
+<span aria-label="صفحة 9 من 9" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>9 / 9</bdi></span>
 <span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
 </footer>
 </section>
