@@ -1,0 +1,3073 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>المجال الرابع — البيئة المدرسية | مدرسة المحمدية وخلف بن هشام لتحفيظ القرآن الكريم</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+<style>
+:root {
+  /* لوحة ألوان هوية وزارة التعليم السعودية */
+  --moe-deep: #003e31;
+  --moe-green: #006650;
+  --moe-teal: #0b7a6e;
+  --moe-gold: #c59b3c;
+  --moe-gold-light: #f4e2b8;
+  --moe-gold-soft: #fbf7ed;
+  --moe-surface: #f2f8f6;
+  --moe-tint: #e6f2ef;
+  --moe-line: #b9d5ce;
+  --text-dark: #0f2923;
+  --text-muted: #43635c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #e1ebe8;
+  color: var(--text-dark);
+  font-family: 'Tajawal', Tahoma, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+button, a, input {
+  font-family: inherit;
+}
+
+/* شريط الأدوات العلوي */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--moe-deep);
+  color: #fff;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  border-bottom: 2px solid var(--moe-gold);
+  box-shadow: 0 3px 12px rgba(0, 40, 32, 0.25);
+}
+
+.toolbar strong {
+  color: var(--moe-gold-light);
+  font-weight: 800;
+}
+
+.toolbar a, .toolbar button {
+  background: #fff;
+  color: var(--moe-deep);
+  text-decoration: none;
+  border: 0;
+  padding: 7px 16px;
+  border-radius: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.toolbar a:hover, .toolbar button:hover {
+  background: var(--moe-gold-light);
+}
+
+/* تنبيه الإشعارات المخصص */
+.toast-msg {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%) translateY(90px);
+  background: var(--moe-deep);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 12px;
+  border-right: 4px solid var(--moe-gold);
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(0, 40, 32, 0.3);
+  z-index: 100;
+  opacity: 0;
+  transition: all 0.28s ease;
+  pointer-events: none;
+}
+
+.toast-msg.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* هيكل الصفحة A4 */
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 7.5mm 8mm 7mm;
+  margin: 16px auto;
+  background: #fff;
+  box-shadow: 0 6px 26px rgba(0, 62, 49, 0.14);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 5px;
+  scroll-margin-top: 62px;
+  position: relative;
+}
+
+/* ترويسة الصفحة الاستثنائية بزوايا مدورة بالكامل وتوسيط الشعار */
+.doc-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(125deg, #002b22 0%, #004d3d 48%, #076b5f 85%, #0b7a6e 100%);
+  border: 1.5px solid var(--moe-gold);
+  border-bottom: 4px solid var(--moe-gold);
+  padding: 10px 16px;
+  border-radius: 18px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  min-height: 76px;
+  flex-shrink: 0;
+  box-shadow: 0 6px 18px rgba(0, 43, 34, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  position: relative;
+  overflow: hidden;
+}
+
+.doc-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% -15%, rgba(197, 155, 60, 0.34), transparent 58%),
+    radial-gradient(circle at 8% 110%, rgba(11, 122, 110, 0.45), transparent 50%);
+  pointer-events: none;
+}
+
+.doc-header > div:first-child {
+  text-align: right;
+  position: relative;
+}
+
+.doc-header > div:last-child {
+  text-align: right;
+  position: relative;
+}
+
+.header-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(0, 32, 25, 0.45);
+  border: 1px solid rgba(197, 155, 60, 0.55);
+  border-radius: 11px;
+  overflow: hidden;
+  font-size: 11.5px;
+}
+
+.header-table td {
+  padding: 4px 10px;
+  line-height: 1.45;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.header-table tr + tr td {
+  border-top: 1px solid rgba(197, 155, 60, 0.28);
+}
+
+.header-table td.lbl {
+  width: 34%;
+  background: rgba(197, 155, 60, 0.18);
+  color: var(--moe-gold-light);
+  font-weight: 800;
+  border-left: 1px solid rgba(197, 155, 60, 0.28);
+  white-space: nowrap;
+}
+
+.header-table.right-info td {
+  text-align: center;
+  font-weight: 800;
+}
+
+.header-table.right-info tr:first-child td {
+  color: var(--moe-gold-light);
+  background: rgba(197, 155, 60, 0.16);
+  font-size: 12px;
+}
+
+.logo {
+  position: relative;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--moe-deep);
+  background: linear-gradient(180deg, #ffffff 0%, #fcf6e8 100%);
+  border: 2px solid var(--moe-gold);
+  border-radius: 14px;
+  font-size: 11.5px;
+  font-weight: 900;
+  line-height: 1.25;
+  padding: 6px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22), 0 0 0 3px rgba(197, 155, 60, 0.18);
+}
+
+.logo svg {
+  width: 22px;
+  height: 22px;
+  color: var(--moe-green);
+  margin-bottom: 2px;
+}
+
+/* شريط العنوان مصغر الارتفاع وبدون مسافات قبل أو بعد */
+.title-banner {
+  margin: 0;
+  padding: 4px 14px;
+  background: linear-gradient(90deg, #f8f1df 0%, #fdfaf2 50%, #f8f1df 100%);
+  border: 1px solid #dfc58a;
+  border-right: 4px solid var(--moe-gold);
+  border-left: 4px solid var(--moe-gold);
+  color: var(--moe-deep);
+  border-radius: 10px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.title-banner h2 {
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+/* بطاقتا المجال والمعيار بتصميم فاخر ولافت للنظر */
+.context {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.context-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  border-radius: 14px;
+  background: linear-gradient(125deg, #003e31 0%, #006650 65%, #0b7a6e 100%);
+  border: 1.5px solid var(--moe-gold);
+  border-right: 6px solid var(--moe-gold);
+  box-shadow: 0 4px 12px rgba(0, 62, 49, 0.15);
+  overflow: hidden;
+}
+
+.context-card::after {
+  content: "";
+  position: absolute;
+  left: -18px;
+  bottom: -24px;
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(197, 155, 60, 0.24), transparent 70%);
+  pointer-events: none;
+}
+
+.context-card.standard-card {
+  background: linear-gradient(135deg, #fbf7ed 0%, #ffffff 55%, #eef7f4 100%);
+  border: 1.5px solid var(--moe-gold);
+  border-right: 6px solid var(--moe-gold);
+  box-shadow: 0 4px 12px rgba(197, 155, 60, 0.12);
+}
+
+.context-icon {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(197, 155, 60, 0.18);
+  border: 1px solid rgba(197, 155, 60, 0.55);
+  color: var(--moe-gold-light);
+}
+
+.context-card.standard-card .context-icon {
+  background: linear-gradient(135deg, var(--moe-deep), var(--moe-green));
+  border-color: var(--moe-gold);
+  color: var(--moe-gold-light);
+}
+
+.context-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.context-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.context-card small {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--moe-gold-light);
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+.context-card.standard-card small {
+  color: var(--moe-teal);
+}
+
+.context-card strong {
+  font-size: 16.5px;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.3;
+}
+
+.context-card.standard-card strong {
+  color: var(--moe-deep);
+}
+
+/* حاوية المحتوى وتوزيع المساحة الرأسية */
+.record-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+/* الجدول الرئيسي المتكامل بزوايا مدورة من جميع الجهات */
+table.grid {
+  width: 100%;
+  flex: 1;
+  border-spacing: 0;
+  border: 1.5px solid var(--moe-green);
+  border-radius: 16px;
+  overflow: hidden;
+  table-layout: fixed;
+  margin: 0;
+  box-shadow: 0 3px 12px rgba(0, 62, 49, 0.06);
+}
+
+table.grid th, table.grid td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 8px 12px;
+  line-height: 1.55;
+  overflow-wrap: break-word;
+  font-size: 14px;
+}
+
+table.grid > thead > tr > th {
+  background: linear-gradient(135deg, var(--moe-green), var(--moe-teal));
+  color: #fff;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 10px 14px;
+  border-bottom: 2.5px solid var(--moe-gold);
+}
+
+table.grid > thead > tr > th:first-child {
+  font-size: 13.5px;
+  text-align: center;
+  background: var(--moe-deep);
+  color: var(--moe-gold-light);
+  border-left: 1px solid rgba(197, 155, 60, 0.35);
+}
+
+table.grid > tbody > tr > td {
+  border-top: 1px solid var(--moe-line);
+}
+
+table.grid > tbody > tr > td:first-child {
+  background: var(--moe-tint);
+  font-weight: 800;
+  color: var(--moe-deep);
+  text-align: center;
+  font-size: 13.5px;
+  border-left: 1px solid var(--moe-line);
+}
+
+/* مربع الفقرات وعناصر التحقق */
+td.criteria-cell {
+  padding: 9px 14px !important;
+  background: linear-gradient(180deg, #f3f9f7 0%, #ffffff 100%);
+}
+
+.criteria-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px 16px;
+}
+
+.criteria-list.single-col {
+  grid-template-columns: 1fr;
+}
+
+.criteria-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 12.8px;
+  line-height: 1.45;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.criteria-dot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--moe-gold);
+  box-shadow: 0 0 0 2px rgba(197, 155, 60, 0.25);
+}
+
+/* جدول الشواهد مع عمودي "تم التنفيذ" و"لم ينفذ" */
+td.evidence-wrapper {
+  padding: 6px !important;
+  background: #ffffff;
+}
+
+.evidence-grid {
+  width: 100%;
+  border: 1px solid var(--moe-line);
+  border-spacing: 0;
+  border-radius: 12px;
+  table-layout: fixed;
+  overflow: hidden;
+}
+
+.evidence-grid thead th {
+  padding: 5px 6px;
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.35;
+  background: var(--moe-teal);
+  color: #fff;
+  font-weight: 800;
+}
+
+.evidence-grid thead th:first-child {
+  text-align: right;
+  padding-right: 12px;
+  background: var(--moe-green);
+}
+
+.evidence-grid thead th + th {
+  border-right: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.evidence-grid tbody td {
+  padding: 4px 10px;
+  vertical-align: middle;
+  font-size: 13.5px;
+  line-height: 1.4;
+  background: #fff;
+  color: var(--text-dark);
+  font-weight: 600;
+  border-top: 1px solid #dbe9e5;
+}
+
+.evidence-grid tbody tr:nth-child(even) td {
+  background: #f7fbfa;
+}
+
+.evidence-grid tbody td + td {
+  border-right: 1px solid #dbe9e5;
+}
+
+.ev-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 19px;
+  height: 19px;
+  margin-left: 7px;
+  border-radius: 50%;
+  background: var(--moe-tint);
+  border: 1px solid var(--moe-line);
+  color: var(--moe-green);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* خلايا حالة التنفيذ — مربعات نظيفة بدون علامات مسبقة */
+td.status-cell {
+  text-align: center !important;
+  padding: 4px !important;
+}
+
+.status-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  position: relative;
+}
+
+.status-check input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.status-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 1.5px solid var(--moe-line);
+  background: #fff;
+  display: block;
+  transition: all 0.15s ease;
+}
+
+.status-check:hover .status-box {
+  border-color: var(--moe-teal);
+}
+
+.status-check input:checked + .status-box.done {
+  background: var(--moe-green);
+  border-color: var(--moe-green);
+  box-shadow: inset 0 0 0 2.5px #fff;
+}
+
+.status-check input:checked + .status-box.not-done {
+  background: #b93848;
+  border-color: #b93848;
+  box-shadow: inset 0 0 0 2.5px #fff;
+}
+
+/* خلية الباركود */
+td.evidence-qr {
+  position: relative;
+  text-align: center !important;
+  padding: 3px !important;
+  background: var(--moe-surface) !important;
+}
+
+/* خلية الباركود — كبيرة وواضحة بدون نص مكرر */
+td.evidence-qr {
+  position: relative;
+  text-align: center !important;
+  padding: 4px !important;
+  background: var(--moe-surface) !important;
+}
+
+.qr-box {
+  position: relative;
+  display: flex;
+  width: 82px;
+  height: 82px;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px dashed var(--moe-teal);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--moe-deep);
+  cursor: pointer;
+  padding: 5px;
+  transition: all 0.15s ease;
+}
+
+.qr-box:hover {
+  border-color: var(--moe-gold);
+  background: var(--moe-gold-soft);
+}
+
+.qr-box input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.qr-symbol {
+  width: 38px;
+  height: 38px;
+  color: var(--moe-teal);
+  opacity: 0.88;
+}
+
+.qr-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  background: #fff;
+}
+
+.qr-box.has-image {
+  border: 1px solid var(--moe-line);
+  padding: 0;
+  border-radius: 4px;
+}
+
+.qr-box.has-image .qr-symbol,
+[hidden] {
+  display: none !important;
+}
+
+.qr-clear {
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  border: 0;
+  border-radius: 50%;
+  background: #a32638;
+  color: #fff;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  line-height: 18px;
+  cursor: pointer;
+  z-index: 2;
+  font-size: 12px;
+}
+
+/* صف المصدر المسؤول ملاصق أسفل الجدول مباشرة */
+tr.source-row td {
+  background: linear-gradient(to left, var(--moe-gold-soft), #ffffff 70%) !important;
+  border-top: 1.5px solid var(--moe-gold) !important;
+  padding: 7px 12px !important;
+  font-size: 13.5px !important;
+  font-weight: 800;
+  color: var(--moe-deep);
+}
+
+tr.source-row td:first-child {
+  background: var(--moe-deep) !important;
+  color: var(--moe-gold-light) !important;
+}
+
+/* وضع التكثيف التلقائي عند وجود شواهد كثيرة (٦ شواهد فأكثر) لمنع الازدحام */
+.evidence-grid.dense-mode tbody td {
+  padding: 2.5px 8px;
+  font-size: 12.5px;
+}
+
+.evidence-grid.dense-mode .qr-box {
+  width: 64px;
+  height: 64px;
+}
+
+.evidence-grid.dense-mode .qr-symbol {
+  width: 30px;
+  height: 30px;
+}
+
+/* وضع التكثيف الفائق للصفحات ذات 8 أو 9 شواهد */
+.evidence-grid.ultra-dense tbody td {
+  padding: 1.5px 8px;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.evidence-grid.ultra-dense .qr-box {
+  width: 52px;
+  height: 52px;
+}
+
+.evidence-grid.ultra-dense .qr-symbol {
+  width: 24px;
+  height: 24px;
+}
+
+.evidence-grid.dense-mode .qr-symbol {
+  width: 26px;
+  height: 26px;
+}
+
+/* وضع التكثيف الفائق للصفحات ذات 8 أو 9 شواهد */
+.evidence-grid.ultra-dense tbody td {
+  padding: 1.5px 8px;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.evidence-grid.ultra-dense .qr-box {
+  width: 46px;
+  height: 46px;
+}
+
+.evidence-grid.ultra-dense .qr-symbol {
+  width: 22px;
+  height: 22px;
+}
+
+/* الملاحظات ومرجع الصفحة */
+.meta-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.notes {
+  background: var(--moe-gold-soft);
+  border: 1px solid #e3cf9b;
+  border-right: 4px solid var(--moe-gold);
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--text-dark);
+}
+
+.notes p {
+  margin: 1px 0;
+}
+
+.source-ref {
+  color: var(--text-muted);
+  font-size: 11px;
+  margin: 2px 4px 0;
+  text-align: left;
+  font-weight: 700;
+}
+
+/* تخطيط صفحة الغلاف والفواصل بزوايا مدورة بالكامل */
+.cover-center, .divider-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: 16px 0;
+}
+
+.hero {
+  width: 95%;
+  background: linear-gradient(125deg, #002b22 0%, #004d3d 48%, #076b5f 85%, #0b7a6e 100%);
+  border: 1.5px solid var(--moe-gold);
+  border-bottom: 6px solid var(--moe-gold);
+  border-radius: 26px;
+  color: #fff;
+  padding: 36px 24px;
+  box-shadow: 0 10px 26px rgba(0, 43, 34, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% -10%, rgba(197, 155, 60, 0.35), transparent 60%);
+  pointer-events: none;
+}
+
+.hero h1 {
+  font-size: 36px;
+  font-weight: 900;
+  margin: 8px 0;
+  position: relative;
+}
+
+.hero p {
+  margin: 6px 0;
+  font-size: 17px;
+  position: relative;
+}
+
+.kicker {
+  color: var(--moe-teal);
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.hero .kicker {
+  color: var(--moe-gold-light);
+}
+
+.year {
+  font-weight: 800;
+  color: var(--moe-deep);
+  font-size: 16.5px;
+  background: linear-gradient(90deg, #f8f1df, #fdfaf2, #f8f1df);
+  padding: 7px 26px;
+  border-radius: 14px;
+  border: 1px solid #dfc58a;
+}
+
+.index {
+  width: 95%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  text-align: right;
+}
+
+.index a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-decoration: none;
+  border: 1px solid var(--moe-line);
+  border-right: 5px solid var(--moe-green);
+  border-radius: 16px;
+  background: linear-gradient(135deg, #e7f4f0 0%, #f5faf8 60%, #ffffff 100%);
+  padding: 14px 18px;
+  color: var(--moe-deep);
+  font-size: 16px;
+  font-weight: 800;
+  transition: all 0.15s ease;
+}
+
+.index small {
+  font-weight: 700;
+  font-size: 12.5px;
+  color: var(--moe-teal);
+}
+
+.divider-center .hero {
+  padding: 40px 20px;
+}
+
+.divider-center .hero h1 {
+  font-size: 33px;
+}
+
+.divider-count {
+  font-size: 15px;
+  color: var(--moe-deep);
+  font-weight: 800;
+  background: var(--moe-tint);
+  padding: 6px 22px;
+  border-radius: 12px;
+  border: 1px solid var(--moe-line);
+}
+
+.divider-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 95%;
+  text-align: right;
+}
+
+.divider-links a {
+  padding: 10px 16px;
+  border: 1px solid var(--moe-line);
+  border-right: 4.5px solid var(--moe-green);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f2f8f6 0%, #ffffff 100%);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--moe-deep);
+  transition: all 0.15s ease;
+}
+
+.divider-links span {
+  font-weight: 800;
+  color: var(--moe-teal);
+  white-space: nowrap;
+}
+
+.index a:hover, .divider-links a:hover {
+  background: #dff0eb;
+  border-right-color: var(--moe-gold);
+}
+
+/* تذييل الصفحة بزوايا مدورة بالكامل */
+.page-footer {
+  margin-top: 0;
+  background: linear-gradient(125deg, #002b22 0%, var(--moe-deep) 60%, var(--moe-green) 100%);
+  color: #fff;
+  border-top: 2.5px solid var(--moe-gold);
+  border-radius: 14px;
+  padding: 7px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 11.5px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.pg-num {
+  white-space: nowrap;
+  background: rgba(197, 155, 60, 0.22);
+  border: 1px solid rgba(197, 155, 60, 0.45);
+  color: var(--moe-gold-light);
+  padding: 2px 10px;
+  border-radius: 8px;
+}
+
+/* قواعد الطباعة A4 الدقيقة */
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }
+
+  .toolbar, .toast-msg, .qr-clear {
+    display: none !important;
+  }
+
+  .page {
+    margin: 0;
+    box-shadow: none;
+    width: 210mm;
+    height: 296.8mm;
+    min-height: 296.8mm;
+    padding: 7.5mm 7.5mm 7mm;
+    break-after: page;
+    break-inside: avoid;
+  }
+
+  .page:last-of-type {
+    break-after: auto;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+/* التجاوب مع الشاشات الصغيرة */
+@media screen and (max-width: 820px) {
+  .page {
+    width: calc(100% - 16px);
+    min-height: auto;
+    padding: 14px 10px;
+    margin: 10px auto;
+  }
+
+  .doc-header {
+    font-size: 10.5px;
+    grid-template-columns: 1fr auto 1.2fr;
+    gap: 8px;
+    padding: 8px 10px;
+  }
+
+  .criteria-list {
+    grid-template-columns: 1fr;
+  }
+
+  .index {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .hero, .divider-links {
+    width: 100%;
+  }
+
+  .hero h1, .divider-center .hero h1 {
+    font-size: 25px;
+  }
+
+  .evidence-grid col:nth-child(1) { width: 46% !important; }
+  .evidence-grid col:nth-child(2) { width: 13% !important; }
+  .evidence-grid col:nth-child(3) { width: 13% !important; }
+  .evidence-grid col:nth-child(4) { width: 28% !important; }
+
+  .evidence-grid tbody td {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+
+  .qr-box {
+    width: 54px;
+    height: 54px;
+  }
+
+  .page-footer {
+    font-size: 10px;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* جدولة البيانات مع المحافظة على الهوية الأصلية */
+.header-table th.lbl { width:34%; text-align:right; padding:4px 10px; line-height:1.45; background:rgba(197,155,60,.18); color:var(--moe-gold-light); font-weight:800; border-left:1px solid rgba(197,155,60,.28); white-space:nowrap; }
+.header-table tr+tr th { border-top:1px solid rgba(197,155,60,.28); }
+.index.table-nav, .divider-links.table-nav { display:block; width:95%; }
+.section-data { width:100%; border:1px solid var(--moe-line); border-spacing:0; border-radius:12px; overflow:hidden; table-layout:fixed; background:#fff; text-align:right; }
+.section-data thead th { background:var(--moe-green); color:#fff; font-size:14px; font-weight:800; padding:8px 12px; border-bottom:2px solid var(--moe-gold); text-align:right; }
+.section-data tbody td { padding:9px 12px; font-size:14px; font-weight:600; color:var(--text-dark); line-height:1.45; border-top:1px solid var(--moe-line); vertical-align:middle; overflow-wrap:break-word; }
+.section-data tbody tr:nth-child(even) td { background:#f2f8f6; }
+.section-data th+th,.section-data td+td { border-right:1px solid var(--moe-line); }
+.section-data .seq,.section-data .count,.section-data .indicator-code { text-align:center; color:var(--moe-deep); font-weight:800; }
+.index-data th:first-child { width:10%; text-align:center; }
+.index-data th:last-child { width:26%; text-align:center; }
+.divider-data th:first-child { width:29%; text-align:center; }
+.table-nav .section-data a { display:block; padding:0; border:0; border-radius:0; background:none; font-size:inherit; line-height:inherit; font-weight:inherit; color:var(--moe-deep); text-decoration:none; }
+.table-nav .section-data tr:hover td { background:var(--moe-tint); }
+.table-nav .section-data a:focus-visible { outline:2px solid var(--moe-gold); outline-offset:3px; }
+/* تجاوز أنماط الجدول الخارجي في جدول عناصر التحقق فقط */
+table.grid td.criteria-cell { padding:5px 6px !important; }
+table.grid .criteria-data th, table.grid .criteria-data td { padding:3px 8px; font-size:12.8px; line-height:1.35; font-weight:500; }
+table.grid .criteria-data thead th { font-weight:800; text-align:right; }
+table.grid .criteria-data tr > :first-child { text-align:center; }
+table.grid .criteria-data .seq { background:var(--moe-tint); font-weight:800; }
+@media screen and (max-width:820px) {
+ .index.table-nav,.divider-links.table-nav { width:100%; }
+ .section-data tbody td,.section-data thead th { padding:6px; font-size:12px; }
+ .header-table th.lbl { white-space:normal; padding:4px; }
+ .header-table td { padding:4px; }
+}
+@media print {
+ .section-data tr { break-inside:avoid; }
+}
+
+
+/* ملاءمة بيانات المدرسة الجديدة دون تغيير محتوى السجل */
+.doc-header { grid-template-columns: minmax(0, 0.9fr) auto minmax(0, 1.65fr); }
+.doc-header > div { min-width:0; }
+.doc-header .header-table { table-layout:fixed; }
+.doc-header .header-table th.lbl { width:32%; white-space:normal; padding:3px 6px; }
+.doc-header .header-table td { padding:3px 7px; overflow-wrap:break-word; }
+.page-footer > span:first-child { min-width:0; }
+@media screen and (max-width: 560px) {
+ .doc-header { grid-template-columns: minmax(0, 1fr) auto; gap:6px; }
+ .doc-header > div:last-child { grid-column:1 / -1; }
+ .doc-header .header-table th.lbl { width:30%; }
+ .doc-header .logo { padding:6px 12px; }
+}
+
+
+/* ضبط الترويسة والتذييل: الشعار والترقيم في المركز الهندسي */
+.doc-header { grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); }
+.doc-header > div { min-width:0; }
+.doc-header > .logo { grid-column:2; grid-row:1; justify-self:center; }
+.doc-header > div:first-child { grid-column:1; grid-row:1; }
+.doc-header > div:last-child { grid-column:3; grid-row:1; }
+.doc-header .header-table td.school-header-name { text-align:center; color:#fff; font-size:12px; font-weight:800; line-height:1.5; padding:3px 5px; }
+.school-header-name > span, .footer-school > span, .footer-manager > span { display:block; }
+.page-footer { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:8px; padding:5px 12px; text-align:center; align-items:center; }
+.footer-school { font-size:11.5px; line-height:1.45; font-weight:800; text-align:right; }
+.footer-manager { min-width:0; text-align:left; font-size:11.5px; line-height:1.45; font-weight:800; }
+.footer-manager small { display:block; color:var(--moe-gold-light); font-size:10px; font-weight:700; }
+.page-footer .pg-num { display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:4px 10px; border:1px solid var(--moe-gold); border-radius:10px; background:linear-gradient(135deg,#f4e2b8,#c59b3c); color:var(--moe-deep); box-shadow:0 2px 6px #002b2240; font-weight:900; font-size:12px; justify-self:center; }
+.page-footer .pg-num bdi { direction:ltr; }
+@media screen and (max-width:560px) {
+ .doc-header { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:6px; }
+ .doc-header > .logo { grid-column:1 / -1; grid-row:1; }
+ .doc-header > div:first-child { grid-column:1; grid-row:2; }
+ .doc-header > div:last-child { grid-column:2; grid-row:2; }
+ .doc-header .header-table td.school-header-name { font-size:clamp(8px,2.45vw,12px); padding:3px 2px; }
+ .doc-header .header-table th.lbl { width:42%; font-size:10px; }
+ .page-footer { gap:4px; padding:5px 6px; }
+ .footer-school,.footer-manager { font-size:clamp(8px,2.35vw,11px); }
+ .footer-manager small { font-size:9px; }
+ .page-footer .pg-num { padding:4px 5px; gap:3px; font-size:10px; }
+ .page-footer .pg-num svg { width:13px; height:13px; }
+}
+
+
+/* توحيد خانة عنوان المدرسة مع خانة المنطقة / الإدارة */
+.doc-header .header-table td.school-header-name { font-size:11.5px; padding:3px 4px; overflow-wrap:normal; }
+@media screen and (max-width:560px) {
+ .doc-header .header-table td.school-header-name { font-size:clamp(9px,2.45vw,11.5px); }
+}
+
+/* Drive QR controls: only the dialog is new; document layout is unchanged. */
+a.qr-box { text-decoration:none; }
+a.qr-box input[type="file"] { display:none; }
+a.qr-box:focus-visible { outline:2px solid var(--moe-gold); outline-offset:2px; }
+#driveDialog { width:min(480px, calc(100% - 28px)); padding:22px; border:1.5px solid var(--moe-gold); border-radius:18px; background:#fff; color:var(--text-dark); font-family:inherit; box-shadow:0 12px 48px #003e3140; }
+#driveDialog::backdrop { background:#002b2290; }
+#driveDialog h3 { margin:0 0 8px; color:var(--moe-deep); font-size:20px; }
+#driveDialog p { margin:6px 0 12px; font-size:14px; }
+#driveDialog label { display:block; font-weight:800; font-size:14px; }
+#driveUrl { width:100%; padding:10px; margin:6px 0; border:1px solid var(--moe-line); border-radius:9px; font-size:14px; direction:ltr; text-align:left; }
+#driveError { color:#a32638; font-size:13px; min-height:1.4em; }
+.drive-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.drive-actions button,.drive-actions a { border:1px solid var(--moe-line); background:var(--moe-surface); color:var(--moe-deep); border-radius:9px; padding:8px 12px; font-size:13px; font-weight:800; text-decoration:none; cursor:pointer; font-family:inherit; }
+.drive-actions #driveApply { background:var(--moe-deep); color:white; border-color:var(--moe-deep); }
+@media print { #driveDialog { display:none !important; } a.qr-box { outline:none; } }
+
+</style>
+</head>
+<body>
+<nav class="toolbar">
+<strong>البيئة المدرسية — هوية وزارة التعليم</strong>
+<a href="#cover">الفهرس</a>
+<button onclick="window.print()" type="button">طباعة / حفظ PDF</button>
+<button id="saveEvidence" type="button">حفظ نسخة بالشواهد</button>
+</nav>
+<div aria-live="polite" class="toast-msg" id="toastMsg" role="status"></div>
+<section class="page cover" id="cover">
+<header class="doc-header">
+<div><table class="header-table right-info"><tbody><tr><td>المملكة العربية السعودية</td></tr><tr><td>وزارة التعليم</td></tr></tbody></table></div>
+<div class="logo">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 2L3 7l9 5 9-5-9-5z"></path>
+<path d="M3 12l9 5 9-5"></path>
+<path d="M3 17l9 5 9-5"></path>
+</svg>
+<div>التقويم<br/>المدرسي</div>
+</div>
+<div><table class="header-table"><tbody><tr><th class="lbl" scope="row">المنطقة / الإدارة:</th><td>المدينة المنورة</td></tr><tr><th class="lbl" scope="row">المدرسة:</th><td class="school-header-name"><span>المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></td></tr></tbody></table></div>
+</header>
+<div class="cover-center">
+<div class="kicker">الدليل الإرشادي لأخصائي التقويم المدرسي</div>
+<div class="hero">
+<p class="kicker">المجال الرابع</p>
+<h1>البيئة المدرسية</h1>
+<p>معياران | ٦ مؤشرات</p>
+</div>
+<div class="year">العام الدراسي ١٤٤٨هـ</div>
+<div class="kicker">فهرس المعايير — اضغط للانتقال</div>
+<nav aria-label="فهرس المعايير" class="index table-nav"><table class="section-data index-data"><thead><tr><th scope="col">م</th><th scope="col">المعيار</th><th scope="col">عدد المؤشرات</th></tr></thead><tbody><tr><td class="seq">١</td><td><a href="#standard-1">المبنى المدرسي</a></td><td class="count">٣ مؤشرات</td></tr><tr><td class="seq">٢</td><td><a href="#standard-2">الأمن والسلامة</a></td><td class="count">٣ مؤشرات</td></tr></tbody></table></nav>
+</div>
+<footer class="page-footer">
+<span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
+<span aria-label="صفحة ١ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>١ / ٩</bdi></span>
+<span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
+</footer>
+</section><section class="page divider" id="standard-1">
+<header class="doc-header">
+<div><table class="header-table right-info"><tbody><tr><td>المملكة العربية السعودية</td></tr><tr><td>وزارة التعليم</td></tr></tbody></table></div>
+<div class="logo">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 2L3 7l9 5 9-5-9-5z"></path>
+<path d="M3 12l9 5 9-5"></path>
+<path d="M3 17l9 5 9-5"></path>
+</svg>
+<div>التقويم<br/>المدرسي</div>
+</div>
+<div><table class="header-table"><tbody><tr><th class="lbl" scope="row">المنطقة / الإدارة:</th><td>المدينة المنورة</td></tr><tr><th class="lbl" scope="row">المدرسة:</th><td class="school-header-name"><span>المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></td></tr></tbody></table></div>
+</header>
+<div class="divider-center">
+<div class="kicker">مجال البيئة المدرسية</div>
+<div class="hero">
+<p class="kicker">المعيار ١ من ٢</p>
+<h1>المبنى المدرسي</h1>
+</div>
+<div class="divider-count">٣ مؤشرات</div>
+<nav aria-label="مؤشرات المعيار" class="divider-links table-nav"><table class="section-data divider-data"><thead><tr><th scope="col">المؤشر</th><th scope="col">وصف المؤشر</th></tr></thead><tbody><tr><td class="indicator-code"><a href="#indicator-1-1">المؤشر (١-١-١-٤)</a></td><td><a href="#indicator-1-1">تنظيم مبنى المدرسة ملائم لعدد المتعلمين والمرحلة العمرية.</a></td></tr><tr><td class="indicator-code"><a href="#indicator-1-2">المؤشر (٢-١-١-٤)</a></td><td><a href="#indicator-1-2">تتوافر فصول ومعامل للعملية التعليمية تلبي احتياجات المتعلمين بمن فيهم ذوو الإعاقة.</a></td></tr><tr><td class="indicator-code"><a href="#indicator-1-3">المؤشر (٣-١-١-٤)</a></td><td><a href="#indicator-1-3">تلبي المرافق والخدمات المساندة احتياجات المتعلمين بمن فيهم ذوو الإعاقة.</a></td></tr></tbody></table></nav>
+</div>
+<footer class="page-footer">
+<span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
+<span aria-label="صفحة ٢ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٢ / ٩</bdi></span>
+<span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
+</footer>
+</section><section class="page indicator" data-source-page="33" id="indicator-1-1">
+<header class="doc-header">
+<div><table class="header-table right-info"><tbody><tr><td>المملكة العربية السعودية</td></tr><tr><td>وزارة التعليم</td></tr></tbody></table></div>
+<div class="logo">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 2L3 7l9 5 9-5-9-5z"></path>
+<path d="M3 12l9 5 9-5"></path>
+<path d="M3 17l9 5 9-5"></path>
+</svg>
+<div>التقويم<br/>المدرسي</div>
+</div>
+<div><table class="header-table"><tbody><tr><th class="lbl" scope="row">المنطقة / الإدارة:</th><td>المدينة المنورة</td></tr><tr><th class="lbl" scope="row">المدرسة:</th><td class="school-header-name"><span>المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></td></tr></tbody></table></div>
+</header>
+<div class="title-banner"><h2>الدليل الإرشادي لأخصائي التقويم المدرسي</h2></div>
+<div class="context">
+<div class="context-card domain-card">
+<div class="context-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="7" rx="1.5" width="7" x="3" y="3"></rect><rect height="7" rx="1.5" width="7" x="14" y="3"></rect><rect height="7" rx="1.5" width="7" x="3" y="14"></rect><rect height="7" rx="1.5" width="7" x="14" y="14"></rect></svg></div>
+<div class="context-info"><small>المجال</small><strong>البيئة المدرسية</strong></div>
+</div>
+<div class="context-card standard-card">
+<div class="context-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div>
+<div class="context-info"><small>المعيار</small><strong>المبنى المدرسي</strong></div>
+</div>
+</div>
+<div class="record-body">
+<table class="grid">
+<colgroup><col style="width:18%"/><col style="width:82%"/></colgroup>
+<thead>
+<tr>
+<th>المؤشر (١-١-١-٤)</th>
+<th>تنظيم مبنى المدرسة ملائم لعدد المتعلمين والمرحلة العمرية.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>الفقرة<br/><span style="font-size:11px;font-weight:600;color:var(--moe-teal)">(عناصر التحقق)</span></td>
+<td class="criteria-cell">
+<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">١</td><td><span>وجود شهادة الأمن والسلامة.</span></td></tr></tbody></table>
+</td>
+</tr>
+<tr>
+<td>الوثائق<br/>المطلوبة</td>
+<td class="evidence-wrapper">
+<table class="evidence-grid">
+<colgroup><col style="width:56%"/><col style="width:11%"/><col style="width:11%"/><col style="width:22%"/></colgroup>
+<thead><tr><th>الشاهد</th><th>تم التنفيذ</th><th>لم ينفذ</th><th>الباركود</th></tr></thead>
+<tbody><tr><td><span class="ev-num">١</span>سجل الصيانة.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a aria-label="إدراج رابط Drive أو صورة باركود" class="qr-box" rel="noopener noreferrer" role="button" tabindex="0" target="_blank" title="إدراج رابط Drive أو صورة باركود"><input accept="image/*" type="file"/><svg class="qr-symbol" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 32 32"><path d="M2 2h11v11H2zM19 2h11v11H19zM2 19h11v11H2z"></path><path d="M6 6h3v3H6zM23 6h3v3h-3zM6 23h3v3H6zM18 18h5v5h-5zM26 18h4v4h-4zM18 26h4v4h-4zM26 26h4v4h-4z" fill="currentColor" stroke="none"></path></svg><img alt="باركود الشاهد" class="qr-image" hidden=""/></a><button class="qr-clear" hidden="" type="button">×</button></td></tr></tbody>
+</table>
+</td>
+</tr>
+<tr class="source-row">
+<td>المصدر / المسؤول</td>
+<td>وكيل الشؤون المدرسية.</td>
+</tr>
+</tbody>
+</table>
+<div class="meta-bottom">
+<p class="source-ref">المرجع: الصفحة ٣٣ من السجل الأصلي.</p>
+</div>
+</div>
+<footer class="page-footer">
+<span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
+<span aria-label="صفحة ٣ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٣ / ٩</bdi></span>
+<span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
+</footer>
+</section><section class="page indicator" data-source-page="33" id="indicator-1-2">
+<header class="doc-header">
+<div><table class="header-table right-info"><tbody><tr><td>المملكة العربية السعودية</td></tr><tr><td>وزارة التعليم</td></tr></tbody></table></div>
+<div class="logo">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 2L3 7l9 5 9-5-9-5z"></path>
+<path d="M3 12l9 5 9-5"></path>
+<path d="M3 17l9 5 9-5"></path>
+</svg>
+<div>التقويم<br/>المدرسي</div>
+</div>
+<div><table class="header-table"><tbody><tr><th class="lbl" scope="row">المنطقة / الإدارة:</th><td>المدينة المنورة</td></tr><tr><th class="lbl" scope="row">المدرسة:</th><td class="school-header-name"><span>المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></td></tr></tbody></table></div>
+</header>
+<div class="title-banner"><h2>الدليل الإرشادي لأخصائي التقويم المدرسي</h2></div>
+<div class="context">
+<div class="context-card domain-card">
+<div class="context-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="7" rx="1.5" width="7" x="3" y="3"></rect><rect height="7" rx="1.5" width="7" x="14" y="3"></rect><rect height="7" rx="1.5" width="7" x="3" y="14"></rect><rect height="7" rx="1.5" width="7" x="14" y="14"></rect></svg></div>
+<div class="context-info"><small>المجال</small><strong>البيئة المدرسية</strong></div>
+</div>
+<div class="context-card standard-card">
+<div class="context-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div>
+<div class="context-info"><small>المعيار</small><strong>المبنى المدرسي</strong></div>
+</div>
+</div>
+<div class="record-body">
+<table class="grid">
+<colgroup><col style="width:18%"/><col style="width:82%"/></colgroup>
+<thead>
+<tr>
+<th>المؤشر (٢-١-١-٤)</th>
+<th>تتوافر فصول ومعامل للعملية التعليمية تلبي احتياجات المتعلمين بمن فيهم ذوو الإعاقة.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>الفقرة<br/><span style="font-size:11px;font-weight:600;color:var(--moe-teal)">(عناصر التحقق)</span></td>
+<td class="criteria-cell">
+<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">١</td><td><span>وجود شهادة الأمن والسلامة.</span></td></tr></tbody></table>
+</td>
+</tr>
+<tr>
+<td>الوثائق<br/>المطلوبة</td>
+<td class="evidence-wrapper">
+<table class="evidence-grid">
+<colgroup><col style="width:56%"/><col style="width:11%"/><col style="width:11%"/><col style="width:22%"/></colgroup>
+<thead><tr><th>الشاهد</th><th>تم التنفيذ</th><th>لم ينفذ</th><th>الباركود</th></tr></thead>
+<tbody><tr><td><span class="ev-num">١</span>سجل الصيانة.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a aria-label="إدراج رابط Drive أو صورة باركود" class="qr-box" rel="noopener noreferrer" role="button" tabindex="0" target="_blank" title="إدراج رابط Drive أو صورة باركود"><input accept="image/*" type="file"/><svg class="qr-symbol" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 32 32"><path d="M2 2h11v11H2zM19 2h11v11H19zM2 19h11v11H2z"></path><path d="M6 6h3v3H6zM23 6h3v3h-3zM6 23h3v3H6zM18 18h5v5h-5zM26 18h4v4h-4zM18 26h4v4h-4zM26 26h4v4h-4z" fill="currentColor" stroke="none"></path></svg><img alt="باركود الشاهد" class="qr-image" hidden=""/></a><button class="qr-clear" hidden="" type="button">×</button></td></tr></tbody>
+</table>
+</td>
+</tr>
+<tr class="source-row">
+<td>المصدر / المسؤول</td>
+<td>وكيل الشؤون المدرسية.</td>
+</tr>
+</tbody>
+</table>
+<div class="meta-bottom">
+<p class="source-ref">المرجع: الصفحة ٣٣ من السجل الأصلي.</p>
+</div>
+</div>
+<footer class="page-footer">
+<span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
+<span aria-label="صفحة ٤ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٤ / ٩</bdi></span>
+<span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
+</footer>
+</section><section class="page indicator" data-source-page="33" id="indicator-1-3">
+<header class="doc-header">
+<div><table class="header-table right-info"><tbody><tr><td>المملكة العربية السعودية</td></tr><tr><td>وزارة التعليم</td></tr></tbody></table></div>
+<div class="logo">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 2L3 7l9 5 9-5-9-5z"></path>
+<path d="M3 12l9 5 9-5"></path>
+<path d="M3 17l9 5 9-5"></path>
+</svg>
+<div>التقويم<br/>المدرسي</div>
+</div>
+<div><table class="header-table"><tbody><tr><th class="lbl" scope="row">المنطقة / الإدارة:</th><td>المدينة المنورة</td></tr><tr><th class="lbl" scope="row">المدرسة:</th><td class="school-header-name"><span>المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></td></tr></tbody></table></div>
+</header>
+<div class="title-banner"><h2>الدليل الإرشادي لأخصائي التقويم المدرسي</h2></div>
+<div class="context">
+<div class="context-card domain-card">
+<div class="context-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="7" rx="1.5" width="7" x="3" y="3"></rect><rect height="7" rx="1.5" width="7" x="14" y="3"></rect><rect height="7" rx="1.5" width="7" x="3" y="14"></rect><rect height="7" rx="1.5" width="7" x="14" y="14"></rect></svg></div>
+<div class="context-info"><small>المجال</small><strong>البيئة المدرسية</strong></div>
+</div>
+<div class="context-card standard-card">
+<div class="context-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div>
+<div class="context-info"><small>المعيار</small><strong>المبنى المدرسي</strong></div>
+</div>
+</div>
+<div class="record-body">
+<table class="grid">
+<colgroup><col style="width:18%"/><col style="width:82%"/></colgroup>
+<thead>
+<tr>
+<th>المؤشر (٣-١-١-٤)</th>
+<th>تلبي المرافق والخدمات المساندة احتياجات المتعلمين بمن فيهم ذوو الإعاقة.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>الفقرة<br/><span style="font-size:11px;font-weight:600;color:var(--moe-teal)">(عناصر التحقق)</span></td>
+<td class="criteria-cell">
+<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">١</td><td><span>وجود شهادة الأمن والسلامة.</span></td></tr></tbody></table>
+</td>
+</tr>
+<tr>
+<td>الوثائق<br/>المطلوبة</td>
+<td class="evidence-wrapper">
+<table class="evidence-grid">
+<colgroup><col style="width:56%"/><col style="width:11%"/><col style="width:11%"/><col style="width:22%"/></colgroup>
+<thead><tr><th>الشاهد</th><th>تم التنفيذ</th><th>لم ينفذ</th><th>الباركود</th></tr></thead>
+<tbody><tr><td><span class="ev-num">١</span>سجل الصيانة.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a aria-label="إدراج رابط Drive أو صورة باركود" class="qr-box" rel="noopener noreferrer" role="button" tabindex="0" target="_blank" title="إدراج رابط Drive أو صورة باركود"><input accept="image/*" type="file"/><svg class="qr-symbol" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 32 32"><path d="M2 2h11v11H2zM19 2h11v11H19zM2 19h11v11H2z"></path><path d="M6 6h3v3H6zM23 6h3v3h-3zM6 23h3v3H6zM18 18h5v5h-5zM26 18h4v4h-4zM18 26h4v4h-4zM26 26h4v4h-4z" fill="currentColor" stroke="none"></path></svg><img alt="باركود الشاهد" class="qr-image" hidden=""/></a><button class="qr-clear" hidden="" type="button">×</button></td></tr></tbody>
+</table>
+</td>
+</tr>
+<tr class="source-row">
+<td>المصدر / المسؤول</td>
+<td>وكيل الشؤون المدرسية.</td>
+</tr>
+</tbody>
+</table>
+<div class="meta-bottom">
+<p class="source-ref">المرجع: الصفحة ٣٣ من السجل الأصلي.</p>
+</div>
+</div>
+<footer class="page-footer">
+<span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
+<span aria-label="صفحة ٥ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٥ / ٩</bdi></span>
+<span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
+</footer>
+</section><section class="page divider" id="standard-2">
+<header class="doc-header">
+<div><table class="header-table right-info"><tbody><tr><td>المملكة العربية السعودية</td></tr><tr><td>وزارة التعليم</td></tr></tbody></table></div>
+<div class="logo">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 2L3 7l9 5 9-5-9-5z"></path>
+<path d="M3 12l9 5 9-5"></path>
+<path d="M3 17l9 5 9-5"></path>
+</svg>
+<div>التقويم<br/>المدرسي</div>
+</div>
+<div><table class="header-table"><tbody><tr><th class="lbl" scope="row">المنطقة / الإدارة:</th><td>المدينة المنورة</td></tr><tr><th class="lbl" scope="row">المدرسة:</th><td class="school-header-name"><span>المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></td></tr></tbody></table></div>
+</header>
+<div class="divider-center">
+<div class="kicker">مجال البيئة المدرسية</div>
+<div class="hero">
+<p class="kicker">المعيار ٢ من ٢</p>
+<h1>الأمن والسلامة</h1>
+</div>
+<div class="divider-count">٣ مؤشرات</div>
+<nav aria-label="مؤشرات المعيار" class="divider-links table-nav"><table class="section-data divider-data"><thead><tr><th scope="col">المؤشر</th><th scope="col">وصف المؤشر</th></tr></thead><tbody><tr><td class="indicator-code"><a href="#indicator-2-1">المؤشر (١-١-٢-٤)</a></td><td><a href="#indicator-2-1">تتوافر في فصول المدرسة ومعاملها وجميع مرافقها متطلبات الأمن والسلامة.</a></td></tr><tr><td class="indicator-code"><a href="#indicator-2-2">المؤشر (٢-١-٢-٤)</a></td><td><a href="#indicator-2-2">تعمل المدرسة على صيانة جميع مرافق المبنى وتجهيزاته بانتظام.</a></td></tr><tr><td class="indicator-code"><a href="#indicator-2-3">المؤشر (٣-١-٢-٤)</a></td><td><a href="#indicator-2-3">تعمل المدرسة على نظافة المبنى المدرسي وجميع مرافقه بانتظام.</a></td></tr></tbody></table></nav>
+</div>
+<footer class="page-footer">
+<span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
+<span aria-label="صفحة ٦ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٦ / ٩</bdi></span>
+<span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
+</footer>
+</section><section class="page indicator" data-source-page="33" id="indicator-2-1">
+<header class="doc-header">
+<div><table class="header-table right-info"><tbody><tr><td>المملكة العربية السعودية</td></tr><tr><td>وزارة التعليم</td></tr></tbody></table></div>
+<div class="logo">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 2L3 7l9 5 9-5-9-5z"></path>
+<path d="M3 12l9 5 9-5"></path>
+<path d="M3 17l9 5 9-5"></path>
+</svg>
+<div>التقويم<br/>المدرسي</div>
+</div>
+<div><table class="header-table"><tbody><tr><th class="lbl" scope="row">المنطقة / الإدارة:</th><td>المدينة المنورة</td></tr><tr><th class="lbl" scope="row">المدرسة:</th><td class="school-header-name"><span>المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></td></tr></tbody></table></div>
+</header>
+<div class="title-banner"><h2>الدليل الإرشادي لأخصائي التقويم المدرسي</h2></div>
+<div class="context">
+<div class="context-card domain-card">
+<div class="context-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="7" rx="1.5" width="7" x="3" y="3"></rect><rect height="7" rx="1.5" width="7" x="14" y="3"></rect><rect height="7" rx="1.5" width="7" x="3" y="14"></rect><rect height="7" rx="1.5" width="7" x="14" y="14"></rect></svg></div>
+<div class="context-info"><small>المجال</small><strong>البيئة المدرسية</strong></div>
+</div>
+<div class="context-card standard-card">
+<div class="context-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div>
+<div class="context-info"><small>المعيار</small><strong>الأمن والسلامة</strong></div>
+</div>
+</div>
+<div class="record-body">
+<table class="grid">
+<colgroup><col style="width:18%"/><col style="width:82%"/></colgroup>
+<thead>
+<tr>
+<th>المؤشر (١-١-٢-٤)</th>
+<th>تتوافر في فصول المدرسة ومعاملها وجميع مرافقها متطلبات الأمن والسلامة.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>الفقرة<br/><span style="font-size:11px;font-weight:600;color:var(--moe-teal)">(عناصر التحقق)</span></td>
+<td class="criteria-cell">
+<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">١</td><td><span>وجود شهادة الأمن والسلامة.</span></td></tr></tbody></table>
+</td>
+</tr>
+<tr>
+<td>الوثائق<br/>المطلوبة</td>
+<td class="evidence-wrapper">
+<table class="evidence-grid">
+<colgroup><col style="width:56%"/><col style="width:11%"/><col style="width:11%"/><col style="width:22%"/></colgroup>
+<thead><tr><th>الشاهد</th><th>تم التنفيذ</th><th>لم ينفذ</th><th>الباركود</th></tr></thead>
+<tbody><tr><td><span class="ev-num">١</span>سجل الأمن والسلامة،</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a aria-label="إدراج رابط Drive أو صورة باركود" class="qr-box" rel="noopener noreferrer" role="button" tabindex="0" target="_blank" title="إدراج رابط Drive أو صورة باركود"><input accept="image/*" type="file"/><svg class="qr-symbol" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 32 32"><path d="M2 2h11v11H2zM19 2h11v11H19zM2 19h11v11H2z"></path><path d="M6 6h3v3H6zM23 6h3v3h-3zM6 23h3v3H6zM18 18h5v5h-5zM26 18h4v4h-4zM18 26h4v4h-4zM26 26h4v4h-4z" fill="currentColor" stroke="none"></path></svg><img alt="باركود الشاهد" class="qr-image" hidden=""/></a><button class="qr-clear" hidden="" type="button">×</button></td></tr><tr><td><span class="ev-num">٢</span>سجل الموجه الصحي.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a aria-label="إدراج رابط Drive أو صورة باركود" class="qr-box" rel="noopener noreferrer" role="button" tabindex="0" target="_blank" title="إدراج رابط Drive أو صورة باركود"><input accept="image/*" type="file"/><svg class="qr-symbol" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 32 32"><path d="M2 2h11v11H2zM19 2h11v11H19zM2 19h11v11H2z"></path><path d="M6 6h3v3H6zM23 6h3v3h-3zM6 23h3v3H6zM18 18h5v5h-5zM26 18h4v4h-4zM18 26h4v4h-4zM26 26h4v4h-4z" fill="currentColor" stroke="none"></path></svg><img alt="باركود الشاهد" class="qr-image" hidden=""/></a><button class="qr-clear" hidden="" type="button">×</button></td></tr></tbody>
+</table>
+</td>
+</tr>
+<tr class="source-row">
+<td>المصدر / المسؤول</td>
+<td>وكيل الشؤون المدرسية.</td>
+</tr>
+</tbody>
+</table>
+<div class="meta-bottom">
+<p class="source-ref">المرجع: الصفحة ٣٣ من السجل الأصلي.</p>
+</div>
+</div>
+<footer class="page-footer">
+<span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
+<span aria-label="صفحة ٧ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٧ / ٩</bdi></span>
+<span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
+</footer>
+</section><section class="page indicator" data-source-page="33" id="indicator-2-2">
+<header class="doc-header">
+<div><table class="header-table right-info"><tbody><tr><td>المملكة العربية السعودية</td></tr><tr><td>وزارة التعليم</td></tr></tbody></table></div>
+<div class="logo">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 2L3 7l9 5 9-5-9-5z"></path>
+<path d="M3 12l9 5 9-5"></path>
+<path d="M3 17l9 5 9-5"></path>
+</svg>
+<div>التقويم<br/>المدرسي</div>
+</div>
+<div><table class="header-table"><tbody><tr><th class="lbl" scope="row">المنطقة / الإدارة:</th><td>المدينة المنورة</td></tr><tr><th class="lbl" scope="row">المدرسة:</th><td class="school-header-name"><span>المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></td></tr></tbody></table></div>
+</header>
+<div class="title-banner"><h2>الدليل الإرشادي لأخصائي التقويم المدرسي</h2></div>
+<div class="context">
+<div class="context-card domain-card">
+<div class="context-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="7" rx="1.5" width="7" x="3" y="3"></rect><rect height="7" rx="1.5" width="7" x="14" y="3"></rect><rect height="7" rx="1.5" width="7" x="3" y="14"></rect><rect height="7" rx="1.5" width="7" x="14" y="14"></rect></svg></div>
+<div class="context-info"><small>المجال</small><strong>البيئة المدرسية</strong></div>
+</div>
+<div class="context-card standard-card">
+<div class="context-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div>
+<div class="context-info"><small>المعيار</small><strong>الأمن والسلامة</strong></div>
+</div>
+</div>
+<div class="record-body">
+<table class="grid">
+<colgroup><col style="width:18%"/><col style="width:82%"/></colgroup>
+<thead>
+<tr>
+<th>المؤشر (٢-١-٢-٤)</th>
+<th>تعمل المدرسة على صيانة جميع مرافق المبنى وتجهيزاته بانتظام.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>الفقرة<br/><span style="font-size:11px;font-weight:600;color:var(--moe-teal)">(عناصر التحقق)</span></td>
+<td class="criteria-cell">
+<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">١</td><td><span>تتوفر خطط لأعمال الصيانة.</span></td></tr></tbody></table>
+</td>
+</tr>
+<tr>
+<td>الوثائق<br/>المطلوبة</td>
+<td class="evidence-wrapper">
+<table class="evidence-grid">
+<colgroup><col style="width:56%"/><col style="width:11%"/><col style="width:11%"/><col style="width:22%"/></colgroup>
+<thead><tr><th>الشاهد</th><th>تم التنفيذ</th><th>لم ينفذ</th><th>الباركود</th></tr></thead>
+<tbody><tr><td><span class="ev-num">١</span>سجل الصيانة.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a aria-label="إدراج رابط Drive أو صورة باركود" class="qr-box" rel="noopener noreferrer" role="button" tabindex="0" target="_blank" title="إدراج رابط Drive أو صورة باركود"><input accept="image/*" type="file"/><svg class="qr-symbol" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 32 32"><path d="M2 2h11v11H2zM19 2h11v11H19zM2 19h11v11H2z"></path><path d="M6 6h3v3H6zM23 6h3v3h-3zM6 23h3v3H6zM18 18h5v5h-5zM26 18h4v4h-4zM18 26h4v4h-4zM26 26h4v4h-4z" fill="currentColor" stroke="none"></path></svg><img alt="باركود الشاهد" class="qr-image" hidden=""/></a><button class="qr-clear" hidden="" type="button">×</button></td></tr></tbody>
+</table>
+</td>
+</tr>
+<tr class="source-row">
+<td>المصدر / المسؤول</td>
+<td>وكيل الشؤون المدرسية.</td>
+</tr>
+</tbody>
+</table>
+<div class="meta-bottom">
+<p class="source-ref">المرجع: الصفحة ٣٣ من السجل الأصلي.</p>
+</div>
+</div>
+<footer class="page-footer">
+<span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
+<span aria-label="صفحة ٨ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٨ / ٩</bdi></span>
+<span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
+</footer>
+</section><section class="page indicator" data-source-page="33" id="indicator-2-3">
+<header class="doc-header">
+<div><table class="header-table right-info"><tbody><tr><td>المملكة العربية السعودية</td></tr><tr><td>وزارة التعليم</td></tr></tbody></table></div>
+<div class="logo">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 2L3 7l9 5 9-5-9-5z"></path>
+<path d="M3 12l9 5 9-5"></path>
+<path d="M3 17l9 5 9-5"></path>
+</svg>
+<div>التقويم<br/>المدرسي</div>
+</div>
+<div><table class="header-table"><tbody><tr><th class="lbl" scope="row">المنطقة / الإدارة:</th><td>المدينة المنورة</td></tr><tr><th class="lbl" scope="row">المدرسة:</th><td class="school-header-name"><span>المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></td></tr></tbody></table></div>
+</header>
+<div class="title-banner"><h2>الدليل الإرشادي لأخصائي التقويم المدرسي</h2></div>
+<div class="context">
+<div class="context-card domain-card">
+<div class="context-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="7" rx="1.5" width="7" x="3" y="3"></rect><rect height="7" rx="1.5" width="7" x="14" y="3"></rect><rect height="7" rx="1.5" width="7" x="3" y="14"></rect><rect height="7" rx="1.5" width="7" x="14" y="14"></rect></svg></div>
+<div class="context-info"><small>المجال</small><strong>البيئة المدرسية</strong></div>
+</div>
+<div class="context-card standard-card">
+<div class="context-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div>
+<div class="context-info"><small>المعيار</small><strong>الأمن والسلامة</strong></div>
+</div>
+</div>
+<div class="record-body">
+<table class="grid">
+<colgroup><col style="width:18%"/><col style="width:82%"/></colgroup>
+<thead>
+<tr>
+<th>المؤشر (٣-١-٢-٤)</th>
+<th>تعمل المدرسة على نظافة المبنى المدرسي وجميع مرافقه بانتظام.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>الفقرة<br/><span style="font-size:11px;font-weight:600;color:var(--moe-teal)">(عناصر التحقق)</span></td>
+<td class="criteria-cell">
+<table aria-label="عناصر التحقق" class="section-data criteria-data"><colgroup><col style="width:8%"/><col style="width:92%"/></colgroup><thead><tr><th scope="col">م</th><th scope="col">عناصر التحقق</th></tr></thead><tbody><tr><td class="seq">١</td><td><span>متابعة نظافة المبنى ومرافقه بانتظام.</span></td></tr></tbody></table>
+</td>
+</tr>
+<tr>
+<td>الوثائق<br/>المطلوبة</td>
+<td class="evidence-wrapper">
+<table class="evidence-grid">
+<colgroup><col style="width:56%"/><col style="width:11%"/><col style="width:11%"/><col style="width:22%"/></colgroup>
+<thead><tr><th>الشاهد</th><th>تم التنفيذ</th><th>لم ينفذ</th><th>الباركود</th></tr></thead>
+<tbody><tr><td><span class="ev-num">١</span>سجل الصيانة.</td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box done"></span></label></td><td class="status-cell"><label class="status-check"><input type="checkbox"/><span class="status-box not-done"></span></label></td><td class="evidence-qr"><a aria-label="إدراج رابط Drive أو صورة باركود" class="qr-box" rel="noopener noreferrer" role="button" tabindex="0" target="_blank" title="إدراج رابط Drive أو صورة باركود"><input accept="image/*" type="file"/><svg class="qr-symbol" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 32 32"><path d="M2 2h11v11H2zM19 2h11v11H19zM2 19h11v11H2z"></path><path d="M6 6h3v3H6zM23 6h3v3h-3zM6 23h3v3H6zM18 18h5v5h-5zM26 18h4v4h-4zM18 26h4v4h-4zM26 26h4v4h-4z" fill="currentColor" stroke="none"></path></svg><img alt="باركود الشاهد" class="qr-image" hidden=""/></a><button class="qr-clear" hidden="" type="button">×</button></td></tr></tbody>
+</table>
+</td>
+</tr>
+<tr class="source-row">
+<td>المصدر / المسؤول</td>
+<td>وكيل الشؤون المدرسية.</td>
+</tr>
+</tbody>
+</table>
+<div class="meta-bottom">
+<p class="source-ref">المرجع: الصفحة ٣٣ من السجل الأصلي.</p>
+</div>
+</div>
+<footer class="page-footer">
+<span class="footer-school"><span>مدرسة المحمدية وخلف بن هشام</span><span>لتحفيظ القرآن الكريم</span></span>
+<span aria-label="صفحة ٩ من ٩" class="pg-num"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="16"><path d="M6 2.5h8l4 4V21H6z"></path><path d="M14 2.5V7h4M9 11h6M9 14h6M9 17h4"></path></svg><bdi>٩ / ٩</bdi></span>
+<span class="footer-manager"><small>مدير المدرسة</small><span>علي بن أحمد الحارثي</span></span>
+</footer>
+</section>
+<dialog aria-labelledby="driveTitle" dir="rtl" id="driveDialog">
+<h3 id="driveTitle">ربط الشاهد بـ Google Drive</h3>
+<p id="driveEvidence"></p>
+<form id="driveForm" novalidate="">
+<label for="driveUrl">رابط المجلد أو الملف في Drive</label>
+<input aria-describedby="driveError" autocomplete="off" id="driveUrl" inputmode="url" placeholder="https://drive.google.com/drive/folders/…" spellcheck="false" type="url"/>
+<div id="driveError" role="alert"></div>
+<div class="drive-actions">
+<button id="driveApply" type="submit">توليد الباركود وحفظ الرابط</button>
+<a hidden="" id="driveOpen" rel="noopener noreferrer" target="_blank">فتح الرابط ↗</a>
+<button id="driveUpload" type="button">إدراج صورة باركود</button>
+<button id="driveCancel" type="button">إلغاء</button>
+</div>
+</form>
+<p>يصبح الباركود قابلاً للمسح والنقر في PDF عند الحفظ من Chrome. تأكد من صلاحيات مشاركة المجلد للمستفيدين.</p>
+</dialog>
+<script>
+/* Offline QR encoder: Kazuhiko Arase (2009), MIT license. */
+(function(){const modules={'./QR8bitByte':function(module,exports,require){
+var QRMode = require('./QRMode');
+
+function QR8bitByte(data) {
+	this.mode = QRMode.MODE_8BIT_BYTE;
+	this.data = data;
+}
+
+QR8bitByte.prototype = {
+
+	getLength : function() {
+		return this.data.length;
+	},
+	
+	write : function(buffer) {
+		for (var i = 0; i < this.data.length; i++) {
+			// not JIS ...
+			buffer.put(this.data.charCodeAt(i), 8);
+		}
+	}
+};
+
+module.exports = QR8bitByte;
+
+},
+'./QRBitBuffer':function(module,exports,require){
+function QRBitBuffer() {
+	this.buffer = [];
+	this.length = 0;
+}
+
+QRBitBuffer.prototype = {
+
+	get : function(index) {
+		var bufIndex = Math.floor(index / 8);
+		return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+	},
+	
+	put : function(num, length) {
+		for (var i = 0; i < length; i++) {
+			this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+		}
+	},
+	
+	getLengthInBits : function() {
+		return this.length;
+	},
+	
+	putBit : function(bit) {
+	
+		var bufIndex = Math.floor(this.length / 8);
+		if (this.buffer.length <= bufIndex) {
+			this.buffer.push(0);
+		}
+	
+		if (bit) {
+			this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
+		}
+	
+		this.length++;
+	}
+};
+
+module.exports = QRBitBuffer;
+
+},
+'./QRErrorCorrectLevel':function(module,exports,require){
+module.exports = {
+	L : 1,
+	M : 0,
+	Q : 3,
+	H : 2
+};
+
+
+},
+'./QRMaskPattern':function(module,exports,require){
+module.exports = {
+	PATTERN000 : 0,
+	PATTERN001 : 1,
+	PATTERN010 : 2,
+	PATTERN011 : 3,
+	PATTERN100 : 4,
+	PATTERN101 : 5,
+	PATTERN110 : 6,
+	PATTERN111 : 7
+};
+
+},
+'./QRMath':function(module,exports,require){
+var QRMath = {
+
+	glog : function(n) {
+	
+		if (n < 1) {
+			throw new Error("glog(" + n + ")");
+		}
+		
+		return QRMath.LOG_TABLE[n];
+	},
+	
+	gexp : function(n) {
+	
+		while (n < 0) {
+			n += 255;
+		}
+	
+		while (n >= 256) {
+			n -= 255;
+		}
+	
+		return QRMath.EXP_TABLE[n];
+	},
+	
+	EXP_TABLE : new Array(256),
+	
+	LOG_TABLE : new Array(256)
+
+};
+	
+for (var i = 0; i < 8; i++) {
+	QRMath.EXP_TABLE[i] = 1 << i;
+}
+for (var i = 8; i < 256; i++) {
+	QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4]
+		^ QRMath.EXP_TABLE[i - 5]
+		^ QRMath.EXP_TABLE[i - 6]
+		^ QRMath.EXP_TABLE[i - 8];
+}
+for (var i = 0; i < 255; i++) {
+	QRMath.LOG_TABLE[QRMath.EXP_TABLE[i] ] = i;
+}
+
+module.exports = QRMath;
+
+},
+'./QRMode':function(module,exports,require){
+module.exports = {
+    MODE_NUMBER :       1 << 0,
+    MODE_ALPHA_NUM :    1 << 1,
+    MODE_8BIT_BYTE :    1 << 2,
+    MODE_KANJI :        1 << 3
+};
+
+},
+'./QRPolynomial':function(module,exports,require){
+var QRMath = require('./QRMath');
+
+function QRPolynomial(num, shift) {
+	if (num.length === undefined) {
+		throw new Error(num.length + "/" + shift);
+	}
+
+	var offset = 0;
+
+	while (offset < num.length && num[offset] === 0) {
+		offset++;
+	}
+
+	this.num = new Array(num.length - offset + shift);
+	for (var i = 0; i < num.length - offset; i++) {
+		this.num[i] = num[i + offset];
+	}
+}
+
+QRPolynomial.prototype = {
+
+	get : function(index) {
+		return this.num[index];
+	},
+	
+	getLength : function() {
+		return this.num.length;
+	},
+	
+	multiply : function(e) {
+	
+		var num = new Array(this.getLength() + e.getLength() - 1);
+	
+		for (var i = 0; i < this.getLength(); i++) {
+			for (var j = 0; j < e.getLength(); j++) {
+				num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i) ) + QRMath.glog(e.get(j) ) );
+			}
+		}
+	
+		return new QRPolynomial(num, 0);
+	},
+	
+	mod : function(e) {
+	
+		if (this.getLength() - e.getLength() < 0) {
+			return this;
+		}
+	
+		var ratio = QRMath.glog(this.get(0) ) - QRMath.glog(e.get(0) );
+	
+		var num = new Array(this.getLength() );
+		
+		for (var i = 0; i < this.getLength(); i++) {
+			num[i] = this.get(i);
+		}
+		
+		for (var x = 0; x < e.getLength(); x++) {
+			num[x] ^= QRMath.gexp(QRMath.glog(e.get(x) ) + ratio);
+		}
+	
+		// recursive call
+		return new QRPolynomial(num, 0).mod(e);
+	}
+};
+
+module.exports = QRPolynomial;
+
+},
+'./QRRSBlock':function(module,exports,require){
+var QRErrorCorrectLevel = require('./QRErrorCorrectLevel');
+
+function QRRSBlock(totalCount, dataCount) {
+	this.totalCount = totalCount;
+	this.dataCount  = dataCount;
+}
+
+QRRSBlock.RS_BLOCK_TABLE = [
+
+	// L
+	// M
+	// Q
+	// H
+
+	// 1
+	[1, 26, 19],
+	[1, 26, 16],
+	[1, 26, 13],
+	[1, 26, 9],
+	
+	// 2
+	[1, 44, 34],
+	[1, 44, 28],
+	[1, 44, 22],
+	[1, 44, 16],
+
+	// 3
+	[1, 70, 55],
+	[1, 70, 44],
+	[2, 35, 17],
+	[2, 35, 13],
+
+	// 4		
+	[1, 100, 80],
+	[2, 50, 32],
+	[2, 50, 24],
+	[4, 25, 9],
+	
+	// 5
+	[1, 134, 108],
+	[2, 67, 43],
+	[2, 33, 15, 2, 34, 16],
+	[2, 33, 11, 2, 34, 12],
+	
+	// 6
+	[2, 86, 68],
+	[4, 43, 27],
+	[4, 43, 19],
+	[4, 43, 15],
+	
+	// 7		
+	[2, 98, 78],
+	[4, 49, 31],
+	[2, 32, 14, 4, 33, 15],
+	[4, 39, 13, 1, 40, 14],
+	
+	// 8
+	[2, 121, 97],
+	[2, 60, 38, 2, 61, 39],
+	[4, 40, 18, 2, 41, 19],
+	[4, 40, 14, 2, 41, 15],
+	
+	// 9
+	[2, 146, 116],
+	[3, 58, 36, 2, 59, 37],
+	[4, 36, 16, 4, 37, 17],
+	[4, 36, 12, 4, 37, 13],
+	
+	// 10		
+	[2, 86, 68, 2, 87, 69],
+	[4, 69, 43, 1, 70, 44],
+	[6, 43, 19, 2, 44, 20],
+	[6, 43, 15, 2, 44, 16],
+
+	// 11
+	[4, 101, 81],
+	[1, 80, 50, 4, 81, 51],
+	[4, 50, 22, 4, 51, 23],
+	[3, 36, 12, 8, 37, 13],
+
+	// 12
+	[2, 116, 92, 2, 117, 93],
+	[6, 58, 36, 2, 59, 37],
+	[4, 46, 20, 6, 47, 21],
+	[7, 42, 14, 4, 43, 15],
+
+	// 13
+	[4, 133, 107],
+	[8, 59, 37, 1, 60, 38],
+	[8, 44, 20, 4, 45, 21],
+	[12, 33, 11, 4, 34, 12],
+
+	// 14
+	[3, 145, 115, 1, 146, 116],
+	[4, 64, 40, 5, 65, 41],
+	[11, 36, 16, 5, 37, 17],
+	[11, 36, 12, 5, 37, 13],
+
+	// 15
+	[5, 109, 87, 1, 110, 88],
+	[5, 65, 41, 5, 66, 42],
+	[5, 54, 24, 7, 55, 25],
+	[11, 36, 12],
+
+	// 16
+	[5, 122, 98, 1, 123, 99],
+	[7, 73, 45, 3, 74, 46],
+	[15, 43, 19, 2, 44, 20],
+	[3, 45, 15, 13, 46, 16],
+
+	// 17
+	[1, 135, 107, 5, 136, 108],
+	[10, 74, 46, 1, 75, 47],
+	[1, 50, 22, 15, 51, 23],
+	[2, 42, 14, 17, 43, 15],
+
+	// 18
+	[5, 150, 120, 1, 151, 121],
+	[9, 69, 43, 4, 70, 44],
+	[17, 50, 22, 1, 51, 23],
+	[2, 42, 14, 19, 43, 15],
+
+	// 19
+	[3, 141, 113, 4, 142, 114],
+	[3, 70, 44, 11, 71, 45],
+	[17, 47, 21, 4, 48, 22],
+	[9, 39, 13, 16, 40, 14],
+
+	// 20
+	[3, 135, 107, 5, 136, 108],
+	[3, 67, 41, 13, 68, 42],
+	[15, 54, 24, 5, 55, 25],
+	[15, 43, 15, 10, 44, 16],
+
+	// 21
+	[4, 144, 116, 4, 145, 117],
+	[17, 68, 42],
+	[17, 50, 22, 6, 51, 23],
+	[19, 46, 16, 6, 47, 17],
+
+	// 22
+	[2, 139, 111, 7, 140, 112],
+	[17, 74, 46],
+	[7, 54, 24, 16, 55, 25],
+	[34, 37, 13],
+
+	// 23
+	[4, 151, 121, 5, 152, 122],
+	[4, 75, 47, 14, 76, 48],
+	[11, 54, 24, 14, 55, 25],
+	[16, 45, 15, 14, 46, 16],
+
+	// 24
+	[6, 147, 117, 4, 148, 118],
+	[6, 73, 45, 14, 74, 46],
+	[11, 54, 24, 16, 55, 25],
+	[30, 46, 16, 2, 47, 17],
+
+	// 25
+	[8, 132, 106, 4, 133, 107],
+	[8, 75, 47, 13, 76, 48],
+	[7, 54, 24, 22, 55, 25],
+	[22, 45, 15, 13, 46, 16],
+
+	// 26
+	[10, 142, 114, 2, 143, 115],
+	[19, 74, 46, 4, 75, 47],
+	[28, 50, 22, 6, 51, 23],
+	[33, 46, 16, 4, 47, 17],
+
+	// 27
+	[8, 152, 122, 4, 153, 123],
+	[22, 73, 45, 3, 74, 46],
+	[8, 53, 23, 26, 54, 24],
+	[12, 45, 15, 28, 46, 16],
+
+	// 28
+	[3, 147, 117, 10, 148, 118],
+	[3, 73, 45, 23, 74, 46],
+	[4, 54, 24, 31, 55, 25],
+	[11, 45, 15, 31, 46, 16],
+
+	// 29
+	[7, 146, 116, 7, 147, 117],
+	[21, 73, 45, 7, 74, 46],
+	[1, 53, 23, 37, 54, 24],
+	[19, 45, 15, 26, 46, 16],
+
+	// 30
+	[5, 145, 115, 10, 146, 116],
+	[19, 75, 47, 10, 76, 48],
+	[15, 54, 24, 25, 55, 25],
+	[23, 45, 15, 25, 46, 16],
+
+	// 31
+	[13, 145, 115, 3, 146, 116],
+	[2, 74, 46, 29, 75, 47],
+	[42, 54, 24, 1, 55, 25],
+	[23, 45, 15, 28, 46, 16],
+
+	// 32
+	[17, 145, 115],
+	[10, 74, 46, 23, 75, 47],
+	[10, 54, 24, 35, 55, 25],
+	[19, 45, 15, 35, 46, 16],
+
+	// 33
+	[17, 145, 115, 1, 146, 116],
+	[14, 74, 46, 21, 75, 47],
+	[29, 54, 24, 19, 55, 25],
+	[11, 45, 15, 46, 46, 16],
+
+	// 34
+	[13, 145, 115, 6, 146, 116],
+	[14, 74, 46, 23, 75, 47],
+	[44, 54, 24, 7, 55, 25],
+	[59, 46, 16, 1, 47, 17],
+
+	// 35
+	[12, 151, 121, 7, 152, 122],
+	[12, 75, 47, 26, 76, 48],
+	[39, 54, 24, 14, 55, 25],
+	[22, 45, 15, 41, 46, 16],
+
+	// 36
+	[6, 151, 121, 14, 152, 122],
+	[6, 75, 47, 34, 76, 48],
+	[46, 54, 24, 10, 55, 25],
+	[2, 45, 15, 64, 46, 16],
+
+	// 37
+	[17, 152, 122, 4, 153, 123],
+	[29, 74, 46, 14, 75, 47],
+	[49, 54, 24, 10, 55, 25],
+	[24, 45, 15, 46, 46, 16],
+
+	// 38
+	[4, 152, 122, 18, 153, 123],
+	[13, 74, 46, 32, 75, 47],
+	[48, 54, 24, 14, 55, 25],
+	[42, 45, 15, 32, 46, 16],
+
+	// 39
+	[20, 147, 117, 4, 148, 118],
+	[40, 75, 47, 7, 76, 48],
+	[43, 54, 24, 22, 55, 25],
+	[10, 45, 15, 67, 46, 16],
+
+	// 40
+	[19, 148, 118, 6, 149, 119],
+	[18, 75, 47, 31, 76, 48],
+	[34, 54, 24, 34, 55, 25],
+	[20, 45, 15, 61, 46, 16]
+];
+
+QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+	
+	var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+	
+	if (rsBlock === undefined) {
+		throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
+	}
+
+	var length = rsBlock.length / 3;
+	
+	var list = [];
+	
+	for (var i = 0; i < length; i++) {
+
+		var count = rsBlock[i * 3 + 0];
+		var totalCount = rsBlock[i * 3 + 1];
+		var dataCount  = rsBlock[i * 3 + 2];
+
+		for (var j = 0; j < count; j++) {
+			list.push(new QRRSBlock(totalCount, dataCount) );	
+		}
+	}
+	
+	return list;
+};
+
+QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+
+	switch(errorCorrectLevel) {
+	case QRErrorCorrectLevel.L :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+	case QRErrorCorrectLevel.M :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+	case QRErrorCorrectLevel.Q :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+	case QRErrorCorrectLevel.H :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+	default :
+		return undefined;
+	}
+};
+
+module.exports = QRRSBlock;
+
+},
+'./QRUtil':function(module,exports,require){
+var QRMode = require('./QRMode');
+var QRPolynomial = require('./QRPolynomial');
+var QRMath = require('./QRMath');
+var QRMaskPattern = require('./QRMaskPattern');
+
+var QRUtil = {
+
+    PATTERN_POSITION_TABLE : [
+        [],
+        [6, 18],
+        [6, 22],
+        [6, 26],
+        [6, 30],
+        [6, 34],
+        [6, 22, 38],
+        [6, 24, 42],
+        [6, 26, 46],
+        [6, 28, 50],
+        [6, 30, 54],        
+        [6, 32, 58],
+        [6, 34, 62],
+        [6, 26, 46, 66],
+        [6, 26, 48, 70],
+        [6, 26, 50, 74],
+        [6, 30, 54, 78],
+        [6, 30, 56, 82],
+        [6, 30, 58, 86],
+        [6, 34, 62, 90],
+        [6, 28, 50, 72, 94],
+        [6, 26, 50, 74, 98],
+        [6, 30, 54, 78, 102],
+        [6, 28, 54, 80, 106],
+        [6, 32, 58, 84, 110],
+        [6, 30, 58, 86, 114],
+        [6, 34, 62, 90, 118],
+        [6, 26, 50, 74, 98, 122],
+        [6, 30, 54, 78, 102, 126],
+        [6, 26, 52, 78, 104, 130],
+        [6, 30, 56, 82, 108, 134],
+        [6, 34, 60, 86, 112, 138],
+        [6, 30, 58, 86, 114, 142],
+        [6, 34, 62, 90, 118, 146],
+        [6, 30, 54, 78, 102, 126, 150],
+        [6, 24, 50, 76, 102, 128, 154],
+        [6, 28, 54, 80, 106, 132, 158],
+        [6, 32, 58, 84, 110, 136, 162],
+        [6, 26, 54, 82, 110, 138, 166],
+        [6, 30, 58, 86, 114, 142, 170]
+    ],
+
+    G15 : (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
+    G18 : (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
+    G15_MASK : (1 << 14) | (1 << 12) | (1 << 10)    | (1 << 4) | (1 << 1),
+
+    getBCHTypeInfo : function(data) {
+        var d = data << 10;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );    
+        }
+        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
+    },
+
+    getBCHTypeNumber : function(data) {
+        var d = data << 12;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );    
+        }
+        return (data << 12) | d;
+    },
+
+    getBCHDigit : function(data) {
+
+        var digit = 0;
+
+        while (data !== 0) {
+            digit++;
+            data >>>= 1;
+        }
+
+        return digit;
+    },
+
+    getPatternPosition : function(typeNumber) {
+        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+
+    getMask : function(maskPattern, i, j) {
+        
+        switch (maskPattern) {
+            
+        case QRMaskPattern.PATTERN000 : return (i + j) % 2 === 0;
+        case QRMaskPattern.PATTERN001 : return i % 2 === 0;
+        case QRMaskPattern.PATTERN010 : return j % 3 === 0;
+        case QRMaskPattern.PATTERN011 : return (i + j) % 3 === 0;
+        case QRMaskPattern.PATTERN100 : return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 === 0;
+        case QRMaskPattern.PATTERN101 : return (i * j) % 2 + (i * j) % 3 === 0;
+        case QRMaskPattern.PATTERN110 : return ( (i * j) % 2 + (i * j) % 3) % 2 === 0;
+        case QRMaskPattern.PATTERN111 : return ( (i * j) % 3 + (i + j) % 2) % 2 === 0;
+
+        default :
+            throw new Error("bad maskPattern:" + maskPattern);
+        }
+    },
+
+    getErrorCorrectPolynomial : function(errorCorrectLength) {
+
+        var a = new QRPolynomial([1], 0);
+
+        for (var i = 0; i < errorCorrectLength; i++) {
+            a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0) );
+        }
+
+        return a;
+    },
+
+    getLengthInBits : function(mode, type) {
+
+        if (1 <= type && type < 10) {
+
+            // 1 - 9
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 10;
+            case QRMode.MODE_ALPHA_NUM  : return 9;
+            case QRMode.MODE_8BIT_BYTE  : return 8;
+            case QRMode.MODE_KANJI      : return 8;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 27) {
+
+            // 10 - 26
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 12;
+            case QRMode.MODE_ALPHA_NUM  : return 11;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 10;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 41) {
+
+            // 27 - 40
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 14;
+            case QRMode.MODE_ALPHA_NUM  : return 13;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 12;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else {
+            throw new Error("type:" + type);
+        }
+    },
+
+    getLostPoint : function(qrCode) {
+        
+        var moduleCount = qrCode.getModuleCount();
+        var lostPoint = 0;
+        var row = 0; 
+        var col = 0;
+
+        
+        // LEVEL1
+        
+        for (row = 0; row < moduleCount; row++) {
+
+            for (col = 0; col < moduleCount; col++) {
+
+                var sameCount = 0;
+                var dark = qrCode.isDark(row, col);
+
+                for (var r = -1; r <= 1; r++) {
+
+                    if (row + r < 0 || moduleCount <= row + r) {
+                        continue;
+                    }
+
+                    for (var c = -1; c <= 1; c++) {
+
+                        if (col + c < 0 || moduleCount <= col + c) {
+                            continue;
+                        }
+
+                        if (r === 0 && c === 0) {
+                            continue;
+                        }
+
+                        if (dark === qrCode.isDark(row + r, col + c) ) {
+                            sameCount++;
+                        }
+                    }
+                }
+
+                if (sameCount > 5) {
+                    lostPoint += (3 + sameCount - 5);
+                }
+            }
+        }
+
+        // LEVEL2
+
+        for (row = 0; row < moduleCount - 1; row++) {
+            for (col = 0; col < moduleCount - 1; col++) {
+                var count = 0;
+                if (qrCode.isDark(row,     col    ) ) count++;
+                if (qrCode.isDark(row + 1, col    ) ) count++;
+                if (qrCode.isDark(row,     col + 1) ) count++;
+                if (qrCode.isDark(row + 1, col + 1) ) count++;
+                if (count === 0 || count === 4) {
+                    lostPoint += 3;
+                }
+            }
+        }
+
+        // LEVEL3
+
+        for (row = 0; row < moduleCount; row++) {
+            for (col = 0; col < moduleCount - 6; col++) {
+                if (qrCode.isDark(row, col) && 
+                        !qrCode.isDark(row, col + 1) && 
+                         qrCode.isDark(row, col + 2) && 
+                         qrCode.isDark(row, col + 3) && 
+                         qrCode.isDark(row, col + 4) && 
+                        !qrCode.isDark(row, col + 5) && 
+                         qrCode.isDark(row, col + 6) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount - 6; row++) {
+                if (qrCode.isDark(row, col) &&
+                        !qrCode.isDark(row + 1, col) &&
+                         qrCode.isDark(row + 2, col) &&
+                         qrCode.isDark(row + 3, col) &&
+                         qrCode.isDark(row + 4, col) &&
+                        !qrCode.isDark(row + 5, col) &&
+                         qrCode.isDark(row + 6, col) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        // LEVEL4
+        
+        var darkCount = 0;
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount; row++) {
+                if (qrCode.isDark(row, col) ) {
+                    darkCount++;
+                }
+            }
+        }
+        
+        var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+        lostPoint += ratio * 10;
+
+        return lostPoint;       
+    }
+
+};
+
+module.exports = QRUtil;
+
+},
+'./index':function(module,exports,require){
+//---------------------------------------------------------------------
+// QRCode for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//   http://www.opensource.org/licenses/mit-license.php
+//
+// The word "QR Code" is registered trademark of 
+// DENSO WAVE INCORPORATED
+//   http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+// Modified to work in node for this project (and some refactoring)
+//---------------------------------------------------------------------
+
+var QR8bitByte = require('./QR8bitByte');
+var QRUtil = require('./QRUtil');
+var QRPolynomial = require('./QRPolynomial');
+var QRRSBlock = require('./QRRSBlock');
+var QRBitBuffer = require('./QRBitBuffer');
+
+function QRCode(typeNumber, errorCorrectLevel) {
+	this.typeNumber = typeNumber;
+	this.errorCorrectLevel = errorCorrectLevel;
+	this.modules = null;
+	this.moduleCount = 0;
+	this.dataCache = null;
+	this.dataList = [];
+}
+
+QRCode.prototype = {
+	
+	addData : function(data) {
+		var newData = new QR8bitByte(data);
+		this.dataList.push(newData);
+		this.dataCache = null;
+	},
+	
+	isDark : function(row, col) {
+		if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+			throw new Error(row + "," + col);
+		}
+		return this.modules[row][col];
+	},
+
+	getModuleCount : function() {
+		return this.moduleCount;
+	},
+	
+	make : function() {
+		// Calculate automatically typeNumber if provided is < 1
+		if (this.typeNumber < 1 ){
+			var typeNumber = 1;
+			for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+				var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+
+				var buffer = new QRBitBuffer();
+				var totalDataCount = 0;
+				for (var i = 0; i < rsBlocks.length; i++) {
+					totalDataCount += rsBlocks[i].dataCount;
+				}
+
+				for (var x = 0; x < this.dataList.length; x++) {
+					var data = this.dataList[x];
+					buffer.put(data.mode, 4);
+					buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+					data.write(buffer);
+				}
+				if (buffer.getLengthInBits() <= totalDataCount * 8)
+					break;
+			}
+			this.typeNumber = typeNumber;
+		}
+		this.makeImpl(false, this.getBestMaskPattern() );
+	},
+	
+	makeImpl : function(test, maskPattern) {
+		
+		this.moduleCount = this.typeNumber * 4 + 17;
+		this.modules = new Array(this.moduleCount);
+		
+		for (var row = 0; row < this.moduleCount; row++) {
+			
+			this.modules[row] = new Array(this.moduleCount);
+			
+			for (var col = 0; col < this.moduleCount; col++) {
+				this.modules[row][col] = null;//(col + row) % 3;
+			}
+		}
+	
+		this.setupPositionProbePattern(0, 0);
+		this.setupPositionProbePattern(this.moduleCount - 7, 0);
+		this.setupPositionProbePattern(0, this.moduleCount - 7);
+		this.setupPositionAdjustPattern();
+		this.setupTimingPattern();
+		this.setupTypeInfo(test, maskPattern);
+		
+		if (this.typeNumber >= 7) {
+			this.setupTypeNumber(test);
+		}
+	
+		if (this.dataCache === null) {
+			this.dataCache = QRCode.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+		}
+	
+		this.mapData(this.dataCache, maskPattern);
+	},
+
+	setupPositionProbePattern : function(row, col)  {
+		
+		for (var r = -1; r <= 7; r++) {
+			
+			if (row + r <= -1 || this.moduleCount <= row + r) continue;
+			
+			for (var c = -1; c <= 7; c++) {
+				
+				if (col + c <= -1 || this.moduleCount <= col + c) continue;
+				
+				if ( (0 <= r && r <= 6 && (c === 0 || c === 6) ) || 
+                     (0 <= c && c <= 6 && (r === 0 || r === 6) ) || 
+                     (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+					this.modules[row + r][col + c] = true;
+				} else {
+					this.modules[row + r][col + c] = false;
+				}
+			}		
+		}		
+	},
+	
+	getBestMaskPattern : function() {
+	
+		var minLostPoint = 0;
+		var pattern = 0;
+	
+		for (var i = 0; i < 8; i++) {
+			
+			this.makeImpl(true, i);
+	
+			var lostPoint = QRUtil.getLostPoint(this);
+	
+			if (i === 0 || minLostPoint >  lostPoint) {
+				minLostPoint = lostPoint;
+				pattern = i;
+			}
+		}
+	
+		return pattern;
+	},
+	
+	createMovieClip : function(target_mc, instance_name, depth) {
+	
+		var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);
+		var cs = 1;
+	
+		this.make();
+
+		for (var row = 0; row < this.modules.length; row++) {
+			
+			var y = row * cs;
+			
+			for (var col = 0; col < this.modules[row].length; col++) {
+	
+				var x = col * cs;
+				var dark = this.modules[row][col];
+			
+				if (dark) {
+					qr_mc.beginFill(0, 100);
+					qr_mc.moveTo(x, y);
+					qr_mc.lineTo(x + cs, y);
+					qr_mc.lineTo(x + cs, y + cs);
+					qr_mc.lineTo(x, y + cs);
+					qr_mc.endFill();
+				}
+			}
+		}
+		
+		return qr_mc;
+	},
+
+	setupTimingPattern : function() {
+		
+		for (var r = 8; r < this.moduleCount - 8; r++) {
+			if (this.modules[r][6] !== null) {
+				continue;
+			}
+			this.modules[r][6] = (r % 2 === 0);
+		}
+	
+		for (var c = 8; c < this.moduleCount - 8; c++) {
+			if (this.modules[6][c] !== null) {
+				continue;
+			}
+			this.modules[6][c] = (c % 2 === 0);
+		}
+	},
+	
+	setupPositionAdjustPattern : function() {
+	
+		var pos = QRUtil.getPatternPosition(this.typeNumber);
+		
+		for (var i = 0; i < pos.length; i++) {
+		
+			for (var j = 0; j < pos.length; j++) {
+			
+				var row = pos[i];
+				var col = pos[j];
+				
+				if (this.modules[row][col] !== null) {
+					continue;
+				}
+				
+				for (var r = -2; r <= 2; r++) {
+				
+					for (var c = -2; c <= 2; c++) {
+					
+						if (Math.abs(r) === 2 || 
+                            Math.abs(c) === 2 ||
+                            (r === 0 && c === 0) ) {
+							this.modules[row + r][col + c] = true;
+						} else {
+							this.modules[row + r][col + c] = false;
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	setupTypeNumber : function(test) {
+	
+		var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+        var mod;
+	
+		for (var i = 0; i < 18; i++) {
+			mod = (!test && ( (bits >> i) & 1) === 1);
+			this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+		}
+	
+		for (var x = 0; x < 18; x++) {
+			mod = (!test && ( (bits >> x) & 1) === 1);
+			this.modules[x % 3 + this.moduleCount - 8 - 3][Math.floor(x / 3)] = mod;
+		}
+	},
+	
+	setupTypeInfo : function(test, maskPattern) {
+	
+		var data = (this.errorCorrectLevel << 3) | maskPattern;
+		var bits = QRUtil.getBCHTypeInfo(data);
+        var mod;
+	
+		// vertical		
+		for (var v = 0; v < 15; v++) {
+	
+			mod = (!test && ( (bits >> v) & 1) === 1);
+	
+			if (v < 6) {
+				this.modules[v][8] = mod;
+			} else if (v < 8) {
+				this.modules[v + 1][8] = mod;
+			} else {
+				this.modules[this.moduleCount - 15 + v][8] = mod;
+			}
+		}
+	
+		// horizontal
+		for (var h = 0; h < 15; h++) {
+	
+			mod = (!test && ( (bits >> h) & 1) === 1);
+			
+			if (h < 8) {
+				this.modules[8][this.moduleCount - h - 1] = mod;
+			} else if (h < 9) {
+				this.modules[8][15 - h - 1 + 1] = mod;
+			} else {
+				this.modules[8][15 - h - 1] = mod;
+			}
+		}
+	
+		// fixed module
+		this.modules[this.moduleCount - 8][8] = (!test);
+	
+	},
+	
+	mapData : function(data, maskPattern) {
+		
+		var inc = -1;
+		var row = this.moduleCount - 1;
+		var bitIndex = 7;
+		var byteIndex = 0;
+		
+		for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+	
+			if (col === 6) col--;
+	
+			while (true) {
+	
+				for (var c = 0; c < 2; c++) {
+					
+					if (this.modules[row][col - c] === null) {
+						
+						var dark = false;
+	
+						if (byteIndex < data.length) {
+							dark = ( ( (data[byteIndex] >>> bitIndex) & 1) === 1);
+						}
+	
+						var mask = QRUtil.getMask(maskPattern, row, col - c);
+	
+						if (mask) {
+							dark = !dark;
+						}
+						
+						this.modules[row][col - c] = dark;
+						bitIndex--;
+	
+						if (bitIndex === -1) {
+							byteIndex++;
+							bitIndex = 7;
+						}
+					}
+				}
+								
+				row += inc;
+	
+				if (row < 0 || this.moduleCount <= row) {
+					row -= inc;
+					inc = -inc;
+					break;
+				}
+			}
+		}
+		
+	}
+
+};
+
+QRCode.PAD0 = 0xEC;
+QRCode.PAD1 = 0x11;
+
+QRCode.createData = function(typeNumber, errorCorrectLevel, dataList) {
+	
+	var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+	
+	var buffer = new QRBitBuffer();
+	
+	for (var i = 0; i < dataList.length; i++) {
+		var data = dataList[i];
+		buffer.put(data.mode, 4);
+		buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+		data.write(buffer);
+	}
+
+	// calc num max data.
+	var totalDataCount = 0;
+	for (var x = 0; x < rsBlocks.length; x++) {
+		totalDataCount += rsBlocks[x].dataCount;
+	}
+
+	if (buffer.getLengthInBits() > totalDataCount * 8) {
+		throw new Error("code length overflow. (" + 
+            buffer.getLengthInBits() + 
+            ">" +  
+            totalDataCount * 8 + 
+            ")");
+	}
+
+	// end code
+	if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+		buffer.put(0, 4);
+	}
+
+	// padding
+	while (buffer.getLengthInBits() % 8 !== 0) {
+		buffer.putBit(false);
+	}
+
+	// padding
+	while (true) {
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD0, 8);
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD1, 8);
+	}
+
+	return QRCode.createBytes(buffer, rsBlocks);
+};
+
+QRCode.createBytes = function(buffer, rsBlocks) {
+
+	var offset = 0;
+	
+	var maxDcCount = 0;
+	var maxEcCount = 0;
+	
+	var dcdata = new Array(rsBlocks.length);
+	var ecdata = new Array(rsBlocks.length);
+	
+	for (var r = 0; r < rsBlocks.length; r++) {
+
+		var dcCount = rsBlocks[r].dataCount;
+		var ecCount = rsBlocks[r].totalCount - dcCount;
+
+		maxDcCount = Math.max(maxDcCount, dcCount);
+		maxEcCount = Math.max(maxEcCount, ecCount);
+		
+		dcdata[r] = new Array(dcCount);
+		
+		for (var i = 0; i < dcdata[r].length; i++) {
+			dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+		}
+		offset += dcCount;
+		
+		var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+		var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+		var modPoly = rawPoly.mod(rsPoly);
+		ecdata[r] = new Array(rsPoly.getLength() - 1);
+		for (var x = 0; x < ecdata[r].length; x++) {
+            var modIndex = x + modPoly.getLength() - ecdata[r].length;
+			ecdata[r][x] = (modIndex >= 0)? modPoly.get(modIndex) : 0;
+		}
+
+	}
+	
+	var totalCodeCount = 0;
+	for (var y = 0; y < rsBlocks.length; y++) {
+		totalCodeCount += rsBlocks[y].totalCount;
+	}
+
+	var data = new Array(totalCodeCount);
+	var index = 0;
+
+	for (var z = 0; z < maxDcCount; z++) {
+		for (var s = 0; s < rsBlocks.length; s++) {
+			if (z < dcdata[s].length) {
+				data[index++] = dcdata[s][z];
+			}
+		}
+	}
+
+	for (var xx = 0; xx < maxEcCount; xx++) {
+		for (var t = 0; t < rsBlocks.length; t++) {
+			if (xx < ecdata[t].length) {
+				data[index++] = ecdata[t][xx];
+			}
+		}
+	}
+
+	return data;
+
+};
+
+module.exports = QRCode;
+
+}},cache={};function require(id){if(!cache[id]){const m={exports:{}};cache[id]=m;modules[id](m,m.exports,require);}return cache[id].exports;}window.DriveQRCode=require('./index');})();
+</script>
+<script>
+(() => {
+  const maxBytes = 12 * 1024 * 1024;
+  const toastEl = document.getElementById('toastMsg');
+  let toastTimer = null;
+
+  function showToast(msg) {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3200);
+  }
+
+
+  // Generate locally; no external QR service receives the Drive URL.
+  const dialog = document.getElementById('driveDialog');
+  const urlInput = document.getElementById('driveUrl');
+  const error = document.getElementById('driveError');
+  const openLink = document.getElementById('driveOpen');
+  let activeBox = null;
+  function editBox(box) {
+    activeBox = box;
+    const href = box.getAttribute('href') || '';
+    urlInput.value = href;
+    error.textContent = '';
+    document.getElementById('driveEvidence').textContent = box.closest('tr').cells[0].textContent.trim();
+    openLink.hidden = !href;
+    if (href) openLink.href = href; else openLink.removeAttribute('href');
+    dialog.showModal();
+    urlInput.focus();
+  }
+  function normalizeDrive(raw) {
+    const u = new URL(raw.trim());
+    if (u.protocol !== 'https:' || u.username || u.password || u.port || !['drive.google.com','docs.google.com'].includes(u.hostname)) throw new Error('ألصق رابط HTTPS صحيحًا من Google Drive.');
+    if (u.href.length > 1000) throw new Error('الرابط طويل جدًا. استخدم رابط المشاركة الأصلي من Drive.');
+    return u.href;
+  }
+  function qrImage(url) {
+    const qr = new window.DriveQRCode(-1, 0); // error correction M
+    qr.addData(url); qr.make();
+    const n = qr.getModuleCount(), size = n + 8; // four-module quiet zone
+    let path = '';
+    for (let r=0;r<n;r++) for(let c=0;c<n;c++) if(qr.isDark(r,c)) path += `M${c+4} ${r+4}h1v1h-1z`;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${size*10}" height="${size*10}" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="white"/><path d="${path}" fill="black"/></svg>`;
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  }
+  document.addEventListener('click', e => {
+    const box = e.target.closest('a.qr-box');
+    if (!box || e.target.matches('input[type="file"]')) return;
+    e.preventDefault(); editBox(box);
+  });
+  document.addEventListener('keydown', e => {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('a.qr-box')) { e.preventDefault(); editBox(e.target); }
+  });
+  document.getElementById('driveForm').addEventListener('submit', e => {
+    e.preventDefault();
+    if (!activeBox) return;
+    try {
+      const href = normalizeDrive(urlInput.value);
+      const src = qrImage(href);
+      const img = activeBox.querySelector('.qr-image');
+      img.src = src; img.hidden = false;
+      activeBox.href = href;
+      activeBox.classList.add('has-image');
+      activeBox.title = 'رابط Drive — اضغط للفتح أو التعديل';
+      activeBox.parentElement.querySelector('.qr-clear').hidden = false;
+      dialog.close(); showToast('تم توليد الباركود وربطه بالمجلد بنجاح.');
+    } catch(err) { error.textContent = err instanceof TypeError ? 'أدخل رابط Drive صحيحًا وكاملًا.' : (err.message || 'تعذر توليد الباركود.'); }
+  });
+  document.getElementById('driveCancel').addEventListener('click', () => dialog.close());
+  document.getElementById('driveUpload').addEventListener('click', () => {
+    const input = activeBox && activeBox.querySelector('input[type="file"]');
+    dialog.close(); if(input) input.click();
+  });
+
+  // تفعيل التكثيف التلقائي والفائق للجداول ذات الشواهد الكثيرة لمنع الازدحام
+  document.querySelectorAll('.evidence-grid').forEach((tbl) => {
+    const count = tbl.querySelectorAll('tbody tr').length;
+    if (count >= 8) {
+      tbl.classList.add('dense-mode', 'ultra-dense');
+    } else if (count >= 6) {
+      tbl.classList.add('dense-mode');
+    }
+  });
+
+  // حفظ حالة التنفيذ ومنع اختيار الحالتين للشاهد نفسه
+  document.addEventListener('change', (e) => {
+    const cb = e.target;
+    if (!(cb instanceof HTMLInputElement)) return;
+    if (cb.matches('.status-check input[type="checkbox"]')) {
+      if (cb.checked) {
+        cb.setAttribute('checked', '');
+        cb.closest('tr').querySelectorAll('.status-check input').forEach(other => {
+          if (other !== cb) {
+            other.checked = false;
+            other.removeAttribute('checked');
+          }
+        });
+      } else {
+        cb.removeAttribute('checked');
+      }
+      return;
+    }
+
+    // رفع صورة الباركود
+    if (!cb.matches('.qr-box input[type="file"]')) return;
+    const file = cb.files[0];
+    if (!file) return;
+    cb.value = '';
+
+    if (!file.type.startsWith('image/') || file.size > maxBytes) {
+      showToast('اختر صورة باركود صالحة لا تتجاوز ١٢ ميغابايت.');
+      return;
+    }
+
+    const box = cb.closest('.qr-box');
+    const img = box.querySelector('.qr-image');
+    const clear = box.parentElement.querySelector('.qr-clear');
+    const reader = new FileReader();
+
+    reader.onerror = () => showToast('تعذر قراءة الصورة. حاول مرة أخرى.');
+    reader.onload = () => {
+      const probe = new Image();
+      probe.onerror = () => showToast('تعذر فتح الصورة. اختر ملف صورة سليماً.');
+      probe.onload = () => {
+        box.removeAttribute('href');
+        box.title = 'إدراج رابط Drive أو صورة باركود';
+        img.src = reader.result;
+        img.hidden = false;
+        box.classList.add('has-image');
+        clear.hidden = false;
+        showToast('تم إدراج الباركود بنجاح.');
+      };
+      probe.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // حذف الباركود
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.qr-clear');
+    if (!btn) return;
+    const box = btn.parentElement.querySelector('.qr-box');
+    const img = box.querySelector('.qr-image');
+    box.removeAttribute('href');
+    box.title = 'إدراج رابط Drive أو صورة باركود';
+    img.removeAttribute('src');
+    img.hidden = true;
+    box.classList.remove('has-image');
+    btn.hidden = true;
+    showToast('تم حذف الباركود.');
+  });
+
+  // حفظ نسخة مستقلة بالشواهد وحالة التنفيذ
+  document.getElementById('saveEvidence').addEventListener('click', () => {
+    const copy = document.documentElement.cloneNode(true);
+    copy.querySelector('#driveDialog').removeAttribute('open');
+    copy.querySelector('#driveOpen').removeAttribute('href');
+    copy.querySelector('#driveOpen').hidden = true;
+    copy.querySelector('#driveEvidence').textContent = '';
+    copy.querySelector('#driveError').textContent = '';
+    copy.querySelector('#driveUrl').removeAttribute('value');
+    const toastCopy = copy.querySelector('#toastMsg');
+    if (toastCopy) {
+      toastCopy.classList.remove('show');
+      toastCopy.textContent = '';
+    }
+    const blob = new Blob(['<!DOCTYPE html>\n', copy.outerHTML], {
+      type: 'text/html;charset=utf-8'
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'School_Environment_Evidence.html';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+    showToast('تم حفظ النسخة الكاملة بالشواهد وحالة التنفيذ.');
+  });
+})();
+</script>
+</body>
+</html>
